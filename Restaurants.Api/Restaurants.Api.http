@@ -1,0 +1,20 @@
+@Restaurants.Api_HostAddress = https://localhost:7117
+
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants
+
+###
+
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/1
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
+
+###
+
+@id=0
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
+
+###
