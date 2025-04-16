@@ -10,11 +10,38 @@ GET {{Restaurants.Api_HostAddress}}/api/restaurants/1
 
 ###
 
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
+POST {{Restaurants.API_HostAddress}}/api/restaurants
+Content-Type: application/json
+
+{
+  "Name": "test Delights",
+  "Description": "A culinary experience like no other",
+  "Category": "American",
+  "HasDelivery": true,
+  "ContactEmail": "info@gourmetdelights.com",
+  "ContactNumber": "01248361969",
+  "City": "Metropolis",
+  "Street": "456 Gourmet Avenue",
+  "PostalCode": "54-551"
+}
+
 
 ###
 
-@id=0
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
+
+
+DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/{id}
+
+###
+
+PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/2
+Content-Type: application/json
+
+{
+  "name": "McDonald",
+    "description": "McDonald's Corporation (McDonald's), incorporated on December 21, 1964, operates and franchises McDonald's restaurants.",
+    "category": "American",
+    "hasDelivery": true
+}
 
 ###
