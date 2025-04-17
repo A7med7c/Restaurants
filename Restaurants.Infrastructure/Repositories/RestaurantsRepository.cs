@@ -5,7 +5,7 @@ using Restaurants.Infrastructure.Persistence;
 namespace Restaurants.Infrastructure.Repositories;
 internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestaurantsRepository
 {
-    public async Task<IEnumerable<Restaurant>> GatAllAsync()
+    public async Task<IEnumerable<Restaurant>> GetAllAsync()
     {
         var restaurants = await dbContext.Restaurants
             .Include(r => r.Dishes) // Include the related dishes
