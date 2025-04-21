@@ -26,10 +26,7 @@ namespace Restaurants.Api
             //register serilog
             builder.Host.UseSerilog((context, configuration) =>
 
-            configuration
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            .MinimumLevel.Override("Microsoft.EntityFrameworkCore",LogEventLevel.Information)
-            .WriteTo.Console( outputTemplate: "[{Timestamp:dd-MM HH:mm:ss} {Level:u3}] [{SourceContext}] {Newline} {Message:lj}{NewLine}{Exception}")
+            configuration.ReadFrom.Configuration(context.Configuration)
             );
 
             var app = builder.Build();
