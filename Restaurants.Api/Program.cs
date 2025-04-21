@@ -1,6 +1,8 @@
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
+using Serilog;
+using Serilog.Events;
 using System.Threading.Tasks;
 
 namespace Restaurants.Api
@@ -20,6 +22,15 @@ namespace Restaurants.Api
             builder.Services.AddApplication();
             //Register all service in this method
             builder.Services.AddInfrastructure(builder.Configuration);
+            
+            //register serilog
+            builder.Host.UseSerilog((context, configuration) =>
+
+            configuration
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+            .MinimumLevel.Override("Microsoft.EntityFrameworkCore",LogEventLevel.Information)
+            .WriteTo.Console( outputTemplate: "[{Timestamp:dd-MM HH:mm:ss} {Level:u3}] [{SourceContext}] {Newline} {Message:lj}{NewLine}{Exception}")
+            );
 
             var app = builder.Build();
 
@@ -33,6 +44,9 @@ namespace Restaurants.Api
             {
                 app.MapOpenApi();
             }
+
+            //capture the logs about the executed request on our web API
+            app.UseSerilogRequestLogging(); 
 
             app.UseHttpsRedirection();
 
