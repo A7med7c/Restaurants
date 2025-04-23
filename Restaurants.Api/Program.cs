@@ -20,6 +20,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<ErrorHandlingMiddleware>();
+        builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
 
         builder.Services.AddApplication();
        
@@ -36,6 +37,7 @@ public class Program
         await seeder.Seed();
 
         app.UseMiddleware<ErrorHandlingMiddleware>();
+        app.UseMiddleware<RequestTimeLoggingMiddleware>();
 
         if (app.Environment.IsDevelopment())
         {
