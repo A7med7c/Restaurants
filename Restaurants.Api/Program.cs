@@ -1,58 +1,58 @@
+using Restaurants.Api.Middlewares;
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
 using Serilog;
-using Serilog.Events;
-using System.Threading.Tasks;
 
-namespace Restaurants.Api
+namespace Restaurants.Api;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+        builder.Services.AddControllers();
+        
+        builder.Services.AddEndpointsApiExplorer(); 
+        
+        
+        builder.Services.AddSwaggerGen();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+        builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
-            builder.Services.AddApplication();
-            //Register all service in this method
-            builder.Services.AddInfrastructure(builder.Configuration);
-            
-            //register serilog
-            builder.Host.UseSerilog((context, configuration) =>
+        builder.Services.AddApplication();
+       
+        builder.Services.AddInfrastructure(builder.Configuration);
 
+        builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration)
-            );
+        );
 
-            var app = builder.Build();
+        var app = builder.Build();
 
-            // invoke Seeding befaure app run
-            var scope = app.Services.CreateScope();
-            var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
-            await seeder.Seed();
+        var scope = app.Services.CreateScope();
+        var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+        await seeder.Seed();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
+        app.UseMiddleware<ErrorHandlingMiddleware>();
 
-            //capture the logs about the executed request on our web API
-            app.UseSerilogRequestLogging(); 
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            app.MapOpenApi();
         }
+
+        app.UseSerilogRequestLogging();
+        
+        app.UseHttpsRedirection();
+        
+        app.UseAuthorization();
+        
+        app.MapControllers();
+        
+        app.Run();
+
     }
 }

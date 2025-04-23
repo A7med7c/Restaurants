@@ -17,6 +17,7 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddDbContext<RestaurantDbContext>(options =>
             options.UseSqlServer(ConnectionString)
                    .EnableSensitiveDataLogging()
+
             );
 
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
