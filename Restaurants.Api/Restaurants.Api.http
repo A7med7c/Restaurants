@@ -58,3 +58,7 @@ GET {{Restaurants.Api_HostAddress}}/api/dishes
 GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
 
 ###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/throw
+
+###
