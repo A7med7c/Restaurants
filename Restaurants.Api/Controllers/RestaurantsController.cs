@@ -24,13 +24,10 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RestaurantDto?>> GetById([FromRoute]int id)
+        public async Task<ActionResult<RestaurantDto>> GetById([FromRoute]int id)
         {
             var restaurant = await mediator.Send(new GetRestaurantbyIdQuery(id));
-         
-            if (restaurant is null)
-                return NotFound();
-
+   
             return Ok(restaurant);
         }
 
@@ -50,30 +47,20 @@ namespace Restaurants.Api.Controllers
             //var restaurant = GetById(id);
            //bind id 
             command.Id = id;
-            var isUpdated = await mediator.Send(command);
+             await mediator.Send(command);
 
-            if (isUpdated)
                 return NoContent();
-
-            return NotFound();
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult?> DeleteRestaurant([FromRoute] int id)
+        public async Task<IActionResult> DeleteRestaurant([FromRoute] int id)
         {
-            var isDeleted = await mediator.Send(new DeleteRestaurantCommand(id));
+             await mediator.Send(new DeleteRestaurantCommand(id));
 
-            if (isDeleted)
                 return NoContent();
-
-            return NotFound();
         }
-        [HttpGet("throw")]
-        public IActionResult Throw()
-        {
-            throw new Exception("This is a test exception");
-        }
+      
     }
 }
