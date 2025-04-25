@@ -62,3 +62,29 @@ GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
 GET {{Restaurants.Api_HostAddress}}/api/restaurants/throw
 
 ###
+
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/22/dishes
+Content-Type: application/json
+
+{
+  lla
+}
+
+###
+
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
+Content-Type: application/json
+
+{
+    "name": "Big Tasty",
+    "description": "Sandwich fried Chickin",
+    "price": 11,
+    "kilocalories":222
+
+}
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
+
+###
