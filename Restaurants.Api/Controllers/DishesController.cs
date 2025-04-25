@@ -33,8 +33,8 @@ namespace Restaurants.Api.Controllers
         {
             command.RestaurantId = restaurantId;
 
-            await mediator.Send(command);
-            return Created();
+            var dishId = await mediator.Send(command);
+            return CreatedAtAction(nameof(GetDisheByIdForRestaurant), new { restaurantId, dishId }, null);
         }
 
         [HttpDelete]
