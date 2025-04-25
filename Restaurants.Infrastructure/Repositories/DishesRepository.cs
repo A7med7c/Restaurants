@@ -13,12 +13,4 @@ internal class DishesRepository(RestaurantDbContext dbContext) : IDishesReposito
 
         return entity.Id;
     }
-
-    public async Task<IEnumerable<Dish>> GetAllAsync()
-    {
-        var dishes = await dbContext.Dishes
-            .ToListAsync();
-      
-        return dishes;
-    }
 }

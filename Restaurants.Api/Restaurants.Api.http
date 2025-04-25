@@ -88,3 +88,10 @@ Content-Type: application/json
 GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
 
 ###
+
+@restaurantId=0
+@dishId=0
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes/35
+
+###
