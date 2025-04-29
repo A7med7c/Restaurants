@@ -10,6 +10,7 @@ public class UpdateUseDetailsCommandHandler(IUserContext userContext,
     ILogger<UpdateUseDetailsCommandHandler> logger,
     IUserStore<User> userStore) : IRequestHandler<UpdateUseDetailsCommand>
 {
+    // IUserStore == makeing IUserRepository
     public async Task Handle(UpdateUseDetailsCommand request, CancellationToken cancellationToken)
     {
         var user = userContext.GetCurrentUser();
