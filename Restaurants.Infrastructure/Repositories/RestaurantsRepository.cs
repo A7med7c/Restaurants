@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaurants.Domain.Repositories;
+using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Repositories;
@@ -8,7 +8,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     public async Task<IEnumerable<Restaurant>> GetAllAsync()
     {
         var restaurants = await dbContext.Restaurants
-            .Include(r => r.Dishes) // Include the related dishes
+            .Include(r => r.MenuCategories) // Include the related dishes
             .ToListAsync();
         return restaurants;
     }
@@ -17,7 +17,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     public async Task<Restaurant?> GetByIdAsync(int id)
     {
         var restaurant = await dbContext.Restaurants
-            .Include(r => r.Dishes)
+            .Include(r => r.MenuCategories)
             .FirstOrDefaultAsync(r => r.Id == id);
             
         return restaurant;

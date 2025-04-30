@@ -1,4 +1,4 @@
-﻿namespace Restaurants.Domain.Repositories;
+﻿namespace Restaurants.Domain.Entities;
 
 public interface IRestaurantsRepository
 {

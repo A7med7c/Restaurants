@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Entities;
-using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Infrastructure.Persistence
 {
@@ -10,6 +9,7 @@ namespace Restaurants.Infrastructure.Persistence
 
         internal DbSet<Restaurant> Restaurants { get; set; }
         internal DbSet<Dish> Dishes { get; set; }
+        internal DbSet<MenuCategory> MenuCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,12 +18,24 @@ namespace Restaurants.Infrastructure.Persistence
             modelBuilder.Entity<Restaurant>()
                 .OwnsOne(r=>r.Address);
 
+            modelBuilder.Entity<User>()
+                .OwnsOne(r => r.Address);
+
+
             modelBuilder.Entity<Restaurant>()
-            .HasMany(r => r.Dishes)
-            .WithOne()
-            .HasForeignKey(d => d.RestaurantId);
+                 .HasMany(r => r.MenuCategories)
+                 .WithOne()
+                 .HasForeignKey(d => d.RestaurantId);
+         
+            modelBuilder.Entity<MenuCategory>()
+                 .HasMany(mc => mc.Dishes)
+                 .WithOne()
+                 .HasForeignKey(d => d.MenuCategoryId);
 
-
+            modelBuilder.Entity<User>()
+                  .HasMany(r => r.Restaurants)
+                  .WithOne()
+                 .HasForeignKey(r => r.OwnerId);
 
         }
     }
