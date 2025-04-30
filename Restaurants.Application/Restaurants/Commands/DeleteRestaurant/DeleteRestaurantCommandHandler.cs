@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Domain.Exceptions;
-using Restaurants.Domain.Repositories;
+using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 

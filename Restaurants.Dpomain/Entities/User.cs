@@ -6,4 +6,7 @@ public class User : IdentityUser
 {
     public string? Nationality { get; set; }
     public DateOnly? DateOfBirth { get; set; }
-} 
+    public Address? Address { get; set; }
+    public List<Restaurant> Restaurants { get; set; } = new();
+
+}

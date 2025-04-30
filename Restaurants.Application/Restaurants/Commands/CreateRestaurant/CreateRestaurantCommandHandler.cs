@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Restaurants.Domain.Repositories;
+using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandler> logger,

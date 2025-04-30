@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurants.Domain.Repositories
+namespace Restaurants.Domain.Entities
 {
     public class Restaurant
     {
@@ -19,6 +19,8 @@ namespace Restaurants.Domain.Repositories
         public string? ContactNumber { get; set; }
 
         public Address? Address { get; set; }
-        public List<Dish> Dishes { get; set; } = new();
+        public string OwnerId { get; set; } = default!;
+        public List<MenuCategory> MenuCategories { get; set; } = new();
+      
     }
 }
