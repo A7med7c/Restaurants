@@ -55,22 +55,11 @@ GET {{Restaurants.Api_HostAddress}}/api/dishes
 @id=0
 GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
 
-###
 
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/throw
 
 ###
 
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/22/dishes
-Content-Type: application/json
-
-{
-  lla
-}
-
-###
-
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishe
 Content-Type: application/json
 
 {
@@ -102,7 +91,7 @@ DELETE {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
 POST {{Restaurants.API_HostAddress}}/api/identity/register
 Content-Type: application/json
 {
-  "email": "Admin@test.com",
+  "email": "Owner@test.com",
   "password": "Password1!"
 }
 ###
@@ -113,3 +102,55 @@ Content-Type: application/json
   "email": "Owner@test.com",
   "password": "Password1!"
 }
+###
+GET {{Restaurants.Api_HostAddress}}/api/menucategories/1
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+
+###
+
+@menuCategoryId=0
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/1/menuCategories/1
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/6
+
+###
+
+POST {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes
+Content-Type: application/json
+
+{
+
+  "name": "test",
+  "description": "tester",
+  "price": 10,
+  "kiloCalories": 110
+
+
+}
+
+###
+
+DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/4
+###
+
+PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/4
+Content-Type: application/json
+{
+  
+  "name": "test025",
+  "description": "tester2222",
+  "price": 10.00,
+  "kiloCalories": 1120
+
+}
+###
+
