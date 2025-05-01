@@ -27,7 +27,7 @@ namespace Restaurants.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<RestaurantDbContext>();
 
-          //  services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
+            services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.AddScoped<IDishesRepository, DishesRepository>();
 

@@ -12,10 +12,8 @@ public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommand> log
     {
         logger.LogInformation("Update Restaurant with id : {RestaurantId} with {@Updatedrestaurant}",request.Id,request);
 
-        var restaurant = await restaurantsRepository.GetByIdAsync(request.Id);
-
-        if (restaurant is null)
-            throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
+        var restaurant = await restaurantsRepository.GetByIdAsync(request.Id) 
+            ??throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
 
         mapper.Map(request, restaurant);
 

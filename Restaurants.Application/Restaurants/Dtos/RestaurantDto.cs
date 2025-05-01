@@ -1,5 +1,4 @@
-﻿using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Domain.Entities;
+﻿using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Restaurants.Dtos;
 
@@ -14,7 +13,7 @@ public class RestaurantDto
     public string? City { get; set; }
     public string? Street { get; set; }
     public string? PostalCode { get; set; }
-    public List<DishesDto> Dishes { get; set; } = new();
+    public List<MenuCategory> MenuCategories { get; set; } = new();
 
     //Manual Mapping
     //public static RestaurantDto? FromEntity(Restaurant? restaurant)

@@ -13,7 +13,7 @@ namespace Restaurants.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = UserRoles.Admin)]
     public class RestaurantsController(IMediator mediator) : ControllerBase
     {
 
@@ -25,6 +25,7 @@ namespace Restaurants.Api.Controllers
             return Ok(resturaurants);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<RestaurantDto>> GetById([FromRoute]int id)
         {
@@ -34,7 +35,6 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
         {
             int id = await mediator.Send(command);
@@ -51,8 +51,8 @@ namespace Restaurants.Api.Controllers
            //bind id 
             command.Id = id;
              await mediator.Send(command);
-
-                return NoContent();
+              
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
