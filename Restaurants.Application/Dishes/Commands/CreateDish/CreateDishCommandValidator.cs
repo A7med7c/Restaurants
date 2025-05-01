@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Restaurants.Application.Dishes.Commands.CreatDish;
+namespace Restaurants.Application.Dishes.Commands.CreateDish;
 
-public class CreatDishCommandValidator : AbstractValidator<CreatDishCommand>
+public class CreateDishCommandValidator : AbstractValidator<CreateDishInMenuForRestaurantCommand>
 {
-    public CreatDishCommandValidator()
+    public CreateDishCommandValidator()
     {
         RuleFor(d => d.Price)
             .GreaterThanOrEqualTo(0)
