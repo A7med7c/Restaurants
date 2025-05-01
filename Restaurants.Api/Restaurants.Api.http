@@ -91,7 +91,7 @@ DELETE {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
 POST {{Restaurants.API_HostAddress}}/api/identity/register
 Content-Type: application/json
 {
-  "email": "Owner@test.com",
+  "email": "tester@test.com",
   "password": "Password1!"
 }
 ###
@@ -99,7 +99,7 @@ Content-Type: application/json
 POST {{Restaurants.API_HostAddress}}/api/identity/login
 Content-Type: application/json
 {
-  "email": "Owner@test.com",
+  "email": "tester@test.com",
   "password": "Password1!"
 }
 ###
