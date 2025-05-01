@@ -7,6 +7,7 @@ using Restaurants.Infrastructure.Repositories;
 using Restaurants.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Restaurants.Infrastructure.Authorization;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -25,6 +26,7 @@ namespace Restaurants.Infrastructure.Extensions
 
             services.AddIdentityApiEndpoints<User>()
                 .AddRoles<IdentityRole>()
+                .AddClaimsPrincipalFactory<RestaurantsUserClaimsPrincipalFactory>()
                 .AddEntityFrameworkStores<RestaurantDbContext>();
 
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
