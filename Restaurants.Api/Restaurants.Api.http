@@ -112,7 +112,7 @@ GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
 ###
 
 @menuCategoryId=0
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/1/menuCategories/1
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/7
 
 ###
 
@@ -154,3 +154,19 @@ Content-Type: application/json
 }
 ###
 
+
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+Content-Type: application/json
+
+{
+  "name": "Main Dishes"
+}
+
+
+###
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+Content-Type: application/json
+
+{
+  "name": "Main Dishes"
+}

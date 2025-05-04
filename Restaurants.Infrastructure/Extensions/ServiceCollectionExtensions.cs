@@ -8,6 +8,7 @@ using Restaurants.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Restaurants.Infrastructure.Authorization;
+using Restaurants.Domain.Repositories;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -32,6 +33,7 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.AddScoped<IDishesRepository, DishesRepository>();
+            services.AddScoped<IMenuCategoriesRepository, MenuCategoriesRepository>();
 
 
            
