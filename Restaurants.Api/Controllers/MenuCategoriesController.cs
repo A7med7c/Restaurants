@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Restaurants.Application.MenuCategories.Commands.CreateMenuForRestaurant;
 using Restaurants.Application.MenuCategories.Dtos;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoriesForRestaurant;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoryForRestaurant;
@@ -22,6 +23,16 @@ namespace Restaurants.Api.Controllers
         {
             var menuCategory = await mediator.Send(new GetMenuCategoryForRestaurantQuery(restaurantId, menuCategoryId));
             return Ok(menuCategory);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromBody] CreateMenuForRestaurantCommand command)
+        {
+            command.RestaurantId = restaurantId;
+
+            var menuCategoryId = await mediator.Send(command);
+           
+            return CreatedAtAction(nameof(GetMenuCategoryForRestaurant), new { restaurantId, menuCategoryId },null);
         }
     }
 }
