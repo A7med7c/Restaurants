@@ -8,24 +8,22 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantbyId;
 using Restaurants.Domain.Constants;
+using System.Security.Claims;
 
 namespace Restaurants.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = UserRoles.Admin)]
     public class RestaurantsController(IMediator mediator) : ControllerBase
     {
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll()
         {
             var resturaurants = await mediator.Send(new GetAllRestaurantsQuery());
             return Ok(resturaurants);
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<RestaurantDto>> GetById([FromRoute]int id)
         {
@@ -35,14 +33,19 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
         {
+            var  ownerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+
+            command.OwnerId = ownerId;
             int id = await mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id }, null);
         }
 
         [HttpPatch("{id}")]
+        [Authorize(Roles = UserRoles.Owner)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult?> UpdateRestaurant([FromRoute] int id, UpdateRestaurantCommand command)
@@ -56,6 +59,7 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] int id)

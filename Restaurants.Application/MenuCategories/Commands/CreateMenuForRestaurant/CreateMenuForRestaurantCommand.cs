@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.MenuCategories.Commands.CreateMenuForRestaurant;
 

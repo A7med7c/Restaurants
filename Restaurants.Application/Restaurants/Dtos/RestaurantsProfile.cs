@@ -21,7 +21,7 @@ namespace Restaurants.Application.Restaurants.Dtos
                 .ForMember(d => d.MenuCategories, opt =>
                 opt.MapFrom(src => src.MenuCategories));
 
-            // map from dto to entity
+            // map from command to entity
             CreateMap<CreateRestaurantCommand, Restaurant>()
                 .ForMember(d => d.Address , opt =>
                 opt.MapFrom(src => new Address

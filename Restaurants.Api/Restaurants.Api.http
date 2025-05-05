@@ -1,10 +1,9 @@
 @Restaurants.Api_HostAddress = https://localhost:7117
-@Token = CfDJ8AtTUCxZepRNtQjtfJx2wLlIZCHvNqKDf5hkp3uBF-EAp1YxLcQxCt9mzmtvNAqcqlCiEPZgNHT-9B2mpx-_KL6iZtIZAjXzmCVomaYck1Stk4DrJZ5YCmom-uIcdbZqXrNDNoAWMXB4HmSveUtjSfKTl0xx01PMMnWLtHqPL7hjQcya8aAC2pizAKvynuZ2ub1ZJBGiDv-yF2y9L0dbx-VwdGSCwFhFPjO_dzDHy_SlfCc24UGIM95CjraPYpnKXfgVvjWjghhSRseyG4SJIaud6F3172PKLLQc9CCKIOnqSC1nY7tu4Odvp64jRQjw7010r-Ih7K91-tFLC91obt0WF0VMwccMkBM694R2TOGqf_3Vrf_bA8ralkTtkulZOZc3o8NslN-nAIJn9FNBN_BrXdO7RmM_4dJxuzqd-h7d8CPPQlzlmTf_2IjuwhXZ_532Ga8I0zKAbb78y3ySFWl1uHNCm0X7Xdq-B1OhsIvn5F4UJ0qJ_CGbJNUOzHSYDR_1leTlggc95eK8QW5est5XwSLjFJzWqaB3ZcTlj7OV7oZWGSRXNa9sSJZM4PEz9pk0JJDLle05DQVxbjcjti4LphuojUgSzwIfgNxsJlmf4jUe8WteLRkLGYNf5t5PHNeWv-yI1N40X-h99CaOiRxmTaZc-F7-2JH6KYn9Flxixje_Lm87QV3Td_c2HRfch3fl0-RocD2Ui6uV9ygvQ3I88CByJTz44sNbr5-BeUpyq0LEpQw8Mm4HacbMxIslyVaEdQQVmtfSO7FoakpIuXE
+@Token = CfDJ8AtTUCxZepRNtQjtfJx2wLl-njahyH1XmiGMNauSYIojFq3TsEuqoNHUi52SXHwuBeS-v3eLuDvBuTktJiTuLN27rMi6j5116q2Tvv3JD2vDlj3hKBQ2Xia-mGH3EHV_wGqMv-TWEhI9okZgoEIMLwnancRwHZff_szTbpHg5lG8-CMLzTGdy9fLVsHZDoKfUYFeDB9TbJJpcuCbknWWD97lKvQWwb8o2vlfrjsnOSKi8esE2xXApxa-IWT1Qcn_WUJwj5r-zGb1N1WiUCCQkn0AGTpMT12JjP7BXkTcyrybpOuXmSNOVIdBsO16-jGZL_nHMppak2d1e7FhIePTAWYT3yzS37zJUrWmb0OGFym6WwEoh-bJLEC-cKEyfEHMq1LOnOXZ2zFiE3FMXFJNOtjOJcRDRxDyRCajX39GJx0GaaQ7hLPjqUp-O_D6nXPeSCLTJef9xxKvRmofdf8glj0nyxafpZE0r5PQJtkl_YsTWkxwUNRoB3iEOid5q9AKPimsex_DZqH4NdPG6-t6R8vFjzvMPld45l046AoetlMpbTUrxZe_SqAE_FipAx2F9kwavj8tVJigE76sf0c4DPl_3SKLrp1nMvo2WuoMnxWbVCLcylHaVTM7I6JDpwekXqonPcaQYfKGQS72QLB_SZhXcaRtMRZ398CWf49dRFmCBf-jn7KsLsBglWdPnG5bYCczjgW9eX4QsXKAavtgFKNARNUy6ck9nurY6038Dsr9437627q-_d2lVgAixmQLm1Eea1a1ZqerWfjhESQciCitL38F7iYQRx1gJTvZwX7J
 GET {{Restaurants.Api_HostAddress}}/api/restaurants
 ###
 
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/4
-Authorization: Bearer {{Token}}
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/7
 ###
 
 POST {{Restaurants.API_HostAddress}}/api/restaurants
@@ -28,15 +27,16 @@ Content-Type: application/json
 
 
 
-DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/{id}
-
+DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/7
+Authorization: Bearer {{Token}}
 ###
 
-PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/5
+PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/6
+Authorization: Bearer {{Token}}
 Content-Type: application/json
 
 {
-  "Name": "test4",
+  "Name": "hello",
   "Description": "Hello Tester",
   "Category": "American",
   "HasDelivery": true,
@@ -48,125 +48,64 @@ Content-Type: application/json
 }
 ###
 
-GET {{Restaurants.Api_HostAddress}}/api/dishes
-
-###
-
-@id=0
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/{{id}}
-
-
-
-###
-
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishe
-Content-Type: application/json
-
-{
-    "name": "Big Tasty",
-    "description": "Sandwich fried Chickin",
-    "price": 11,
-    "kilocalories":222
-
-}
-
-###
-
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
-
-###
-
-@restaurantId=0
-@dishId=0
-
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes/35
-
-###
-
-DELETE {{Restaurants.Api_HostAddress}}/api/restaurant/2/dishes
-
-###
-
-
-POST {{Restaurants.API_HostAddress}}/api/identity/register
-Content-Type: application/json
-{
-  "email": "tester@test.com",
-  "password": "Password1!"
-}
-###
 
 POST {{Restaurants.API_HostAddress}}/api/identity/login
 Content-Type: application/json
 {
-  "email": "tester@test.com",
+  "email": "owner@test.com",
   "password": "Password1!"
 }
 ###
-GET {{Restaurants.Api_HostAddress}}/api/menucategories/1
-
-###
-
 GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+###
+GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/9
+###
+@restaurantId=0
+DELETE {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/3
 
 ###
 
+POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+Content-Type: application/json
+
+{
+ "name": "tester"
+}
+
+###
+
+@dishId=0
 @menuCategoryId=0
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/7
-
-###
-
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes
-
-###
-
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/6
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
 
 ###
 
 POST {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes
+Authorization: Bearer {{Token}}
 Content-Type: application/json
 
 {
-
-  "name": "test",
-  "description": "tester",
-  "price": 10,
-  "kiloCalories": 110
-
-
+    "name": "tester",
+    "description": "tester",
+    "price": 10.00,
+    "kiloCalories": 110
 }
 
 ###
 
-DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/4
-###
-
-PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/4
-Content-Type: application/json
-{
-  
-  "name": "test025",
-  "description": "tester2222",
-  "price": 10.00,
-  "kiloCalories": 1120
-
-}
-###
-
-
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
+PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
+Authorization: Bearer {{Token}}
 Content-Type: application/json
 
-{
-  "name": "Main Dishes"
+{  
+   "name": "hhhhh",
+    "description": "tester",
+    "price": 10.00,
+    "kiloCalories": 110
 }
-
 
 ###
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
-Content-Type: application/json
 
-{
-  "name": "Main Dishes"
-}
+DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
+Authorization: Bearer {{Token}}
+###
