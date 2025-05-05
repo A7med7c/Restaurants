@@ -13,4 +13,10 @@ internal class MenuCategoriesRepository(RestaurantDbContext dbContext) : IMenuCa
 
         return entity.Id;
     }
+
+    public async Task DeleteAsync(MenuCategory entity)
+    {
+        dbContext.Remove(entity);
+        await dbContext.SaveChangesAsync();
+    }
 }

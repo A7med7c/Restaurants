@@ -8,8 +8,7 @@ public class DishesProfile : Profile
 {
     public DishesProfile()
     {
-        CreateMap<Dish, DishesDto>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore());
+        CreateMap<Dish, DishesDto>();
 
 
         CreateMap<CreateDishInMenuForRestaurantCommand, Dish>();

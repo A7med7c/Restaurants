@@ -4,5 +4,6 @@ namespace Restaurants.Domain.Repositories;
 
 public interface IMenuCategoriesRepository
 {
-    Task<int> CreateAsync(MenuCategory entity); 
+    Task<int> CreateAsync(MenuCategory entity);
+    Task DeleteAsync(MenuCategory entity);
 }

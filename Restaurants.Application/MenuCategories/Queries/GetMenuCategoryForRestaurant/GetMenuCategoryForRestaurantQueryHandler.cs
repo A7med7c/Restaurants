@@ -18,7 +18,8 @@ public class GetMenuCategoryForRestaurantQueryHandler(ILogger<GetMenuCategoryFor
         var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId)
             ?? throw new NotFoundException(nameof(Restaurant), request.RestaurantId.ToString());
 
-        var menuCategory = restaurant.MenuCategories.FirstOrDefault(mc => mc.Id == request.MenuCategoryId);
+        var menuCategory = restaurant.MenuCategories.FirstOrDefault(mc => mc.Id == request.MenuCategoryId)
+            ?? throw new NotFoundException(nameof(MenuCategory), request.MenuCategoryId.ToString());
 
         var result =  mapper.Map<MenuCategoriesDto>(menuCategory);
 

@@ -8,7 +8,6 @@ using Restaurants.Domain.Repositories;
 namespace Restaurants.Application.MenuCategories.Commands.CreateMenuForRestaurant;
 
 public class CreateMenuForRestaurantCommandHandler(ILogger<CreateMenuForRestaurantCommandHandler> logger,
-    IRestaurantsRepository restaurantsRepository,
     IMenuCategoriesRepository menuCategoriesRepository,
     IMapper mapper) : IRequestHandler<CreateMenuForRestaurantCommand, int>
 {
@@ -16,8 +15,6 @@ public class CreateMenuForRestaurantCommandHandler(ILogger<CreateMenuForRestaura
     {
         logger.LogInformation("Creating new menu category {@Request}", request);
 
-        var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId)
-            ?? throw new NotFoundException(nameof(Restaurant), request.RestaurantId.ToString());
 
         var menuCategory = mapper.Map<MenuCategory>(request);
 
