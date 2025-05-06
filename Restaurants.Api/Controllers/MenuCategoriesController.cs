@@ -6,17 +6,16 @@ using Restaurants.Application.MenuCategories.Commands.DeleteMenuCategoryForResta
 using Restaurants.Application.MenuCategories.Dtos;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoriesForRestaurant;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoryForRestaurant;
-using Restaurants.Domain.Constants;
-using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.Api.Controllers
 {
     [Route("api/restaurant/{RestaurantId}/menuCategories")]
     [ApiController]
+    [Authorize]
     public class MenuCategoriesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
-        [Authorize(Policy = PolicyNames.AtLeast20)]
+       // [Authorize(Policy = PolicyNames.AtLeast20)]
         public async Task<ActionResult<IEnumerable<MenuCategoriesDto>>> GetAllMenuCategoriesForRestaurant([FromRoute] int restaurantId)
         {
             var menuCategories = await mediator.Send(new GetMenuCategoriesForRestaurantQuery(restaurantId));
@@ -31,7 +30,6 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> CreateMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromBody] CreateMenuForRestaurantCommand command)
         {
             command.RestaurantId = restaurantId;
@@ -42,7 +40,6 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpDelete("{menuCategoryId}")]
-        [Authorize(Roles = UserRoles.Owner)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromRoute] int menuCategoryId)

@@ -8,17 +8,17 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantbyId;
 using Restaurants.Domain.Constants;
-using Restaurants.Infrastructure.Authorization;
-using System.Security.Claims;
 
 namespace Restaurants.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RestaurantsController(IMediator mediator) : ControllerBase
     {
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll()
         {
             var resturaurants = await mediator.Send(new GetAllRestaurantsQuery());
@@ -43,10 +43,9 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        [Authorize(Roles = UserRoles.Owner)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult?> UpdateRestaurant([FromRoute] int id, UpdateRestaurantCommand command)
+        public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, UpdateRestaurantCommand command)
         {
             //var restaurant = GetById(id);
            //bind id 
@@ -57,7 +56,6 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = UserRoles.Admin)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] int id)

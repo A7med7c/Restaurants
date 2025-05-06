@@ -5,12 +5,13 @@ using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistence;
 using Restaurants.Infrastructure.Repositories;
 using Restaurants.Infrastructure.Seeders;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Restaurants.Infrastructure.Authorization;
 using Restaurants.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Restaurants.Infrastructure.Authorization.Requirements;
+using Restaurants.Domain.Interfaces;
+using Restaurants.Infrastructure.Authorization.Services;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -43,6 +44,8 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.AddScoped<IDishesRepository, DishesRepository>();
             services.AddScoped<IMenuCategoriesRepository, MenuCategoriesRepository>();
+
+            services.AddScoped<IRestauratntAuthorizationServices, RestauratntAuthorizationServices>();
 
 
            
