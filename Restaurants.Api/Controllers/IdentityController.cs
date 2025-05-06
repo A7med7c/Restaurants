@@ -15,6 +15,7 @@ namespace Restaurants.Api.Controllers;
 public class IdentityController(IMediator mediator) : ControllerBase
 {
     [HttpPatch("user")]
+    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateUserDetails(UpdateUseDetailsCommand command)
