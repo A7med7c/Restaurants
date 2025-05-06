@@ -7,6 +7,7 @@ using Restaurants.Application.MenuCategories.Dtos;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoriesForRestaurant;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoryForRestaurant;
 using Restaurants.Domain.Constants;
+using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.Api.Controllers
 {
@@ -15,6 +16,7 @@ namespace Restaurants.Api.Controllers
     public class MenuCategoriesController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
+        [Authorize(Policy = PolicyNames.AtLeast20)]
         public async Task<ActionResult<IEnumerable<MenuCategoriesDto>>> GetAllMenuCategoriesForRestaurant([FromRoute] int restaurantId)
         {
             var menuCategories = await mediator.Send(new GetMenuCategoriesForRestaurantQuery(restaurantId));

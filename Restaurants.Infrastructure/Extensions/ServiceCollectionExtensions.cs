@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Restaurants.Infrastructure.Authorization;
 using Restaurants.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Restaurants.Infrastructure.Authorization.Requirements;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -29,6 +31,13 @@ namespace Restaurants.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddClaimsPrincipalFactory<RestaurantsUserClaimsPrincipalFactory>()
                 .AddEntityFrameworkStores<RestaurantDbContext>();
+
+            services.AddAuthorizationBuilder()
+                .AddPolicy(PolicyNames.HasNationality, builder => builder.RequireClaim(AppClaimsTypes.Nationality, "Egyptian"))
+                .AddPolicy(PolicyNames.AtLeast20,
+                builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
+
+            services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
 
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();

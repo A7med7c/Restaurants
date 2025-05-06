@@ -8,6 +8,7 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantbyId;
 using Restaurants.Domain.Constants;
+using Restaurants.Infrastructure.Authorization;
 using System.Security.Claims;
 
 namespace Restaurants.Api.Controllers
