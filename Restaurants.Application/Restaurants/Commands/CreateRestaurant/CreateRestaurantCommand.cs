@@ -14,6 +14,5 @@ public class CreateRestaurantCommand : IRequest<int>
     public string? Street { get; set; }
     public string? PostalCode { get; set; }
 
-    public string? OwnerId { get; set; }
 
 }

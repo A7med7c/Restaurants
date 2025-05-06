@@ -37,9 +37,6 @@ namespace Restaurants.Api.Controllers
         [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
         {
-            var  ownerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-
-            command.OwnerId = ownerId;
             int id = await mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id }, null);
