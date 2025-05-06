@@ -12,10 +12,10 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
     {
         if (await dbContext.Database.CanConnectAsync())
         {
-            var owner = await dbContext.Users.FirstOrDefaultAsync(o => o.Email == "Owner@test.com");
-            if (!dbContext.Restaurants.Any() && owner != null)
+           
+            if (!dbContext.Restaurants.Any())
             {
-                var restaurants = GetRestaurants(owner!.Id);
+                var restaurants = GetRestaurants();
                 dbContext.Restaurants.AddRange(restaurants);
                 await dbContext.SaveChangesAsync();
             }
@@ -52,7 +52,7 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
         };
     }
 
-    private IEnumerable<Restaurant> GetRestaurants(string ownerId)
+    private IEnumerable<Restaurant> GetRestaurants()
     {
         return new List<Restaurant>
         {
@@ -63,7 +63,6 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
                 Description = "KFC (short for Kentucky Fried Chicken)...",
                 ContactEmail = "contact@kfc.com",
                 HasDelivery = true,
-                OwnerId = ownerId,
                 Address = new Address
                 {
                     City = "London",
@@ -100,7 +99,6 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
                 Description = "McDonald's Corporation...",
                 ContactEmail = "contact@mcdonald.com",
                 HasDelivery = true,
-                OwnerId = ownerId,
                 Address = new Address
                 {
                     City = "London",
