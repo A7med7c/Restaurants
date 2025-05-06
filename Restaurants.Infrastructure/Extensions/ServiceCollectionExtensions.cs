@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Restaurants.Infrastructure.Authorization;
 using Restaurants.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Restaurants.Infrastructure.Authorization.Requirements;
 using Restaurants.Domain.Interfaces;
 using Restaurants.Infrastructure.Authorization.Services;
+using Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
+using Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -36,9 +37,13 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddAuthorizationBuilder()
                 .AddPolicy(PolicyNames.HasNationality, builder => builder.RequireClaim(AppClaimsTypes.Nationality, "Egyptian"))
                 .AddPolicy(PolicyNames.AtLeast20,
-                builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
+                builder => builder.AddRequirements(new MinimumAgeRequirement(20)))
+                .AddPolicy(PolicyNames.OwnsTwoRestaurants,
+                builder => builder.AddRequirements(new OwnsTwoRestaurantsReqirement(2)));
 
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, OwnsTwoRestaurantsReqirementHandler>();
+
 
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Users;
 
-namespace Restaurants.Infrastructure.Authorization.Requirements;
+namespace Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
 
 public class MinimumAgeRequirementHandler(ILogger<MinimumAgeRequirementHandler> logger,
     IUserContext userContext) : AuthorizationHandler<MinimumAgeRequirement>
@@ -12,7 +12,7 @@ public class MinimumAgeRequirementHandler(ILogger<MinimumAgeRequirementHandler> 
     {
         var currentyUser = userContext.GetCurrentUser();
         logger.LogInformation("User: {Email}, date of birth{DoB} - Handling MinimumAgeRequirement",
-            currentyUser.Email, currentyUser.DateOfBirth);
+            currentyUser!.Email, currentyUser.DateOfBirth);
 
         if (currentyUser.DateOfBirth == null)
         {
