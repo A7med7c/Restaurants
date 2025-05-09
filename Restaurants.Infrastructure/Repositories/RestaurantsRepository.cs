@@ -8,9 +8,17 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     public async Task<IEnumerable<Restaurant>> GetAllAsync()
     {
         var restaurants = await dbContext.Restaurants
-            .Include(mc => mc.MenuCategories) 
-            .ThenInclude(d => d.Dishes)
             .ToListAsync();
+        return restaurants;
+    }
+    public async Task<IEnumerable<Restaurant>> GetAllMatchingAsync(string? searchPhrase)
+    {
+        var searchPhraseLower = searchPhrase?.ToLower();
+        var restaurants = await dbContext.Restaurants
+            
+         .Where(r => searchPhraseLower == null || 
+         (r.Name.ToLower().Contains(searchPhraseLower) || r.Description.ToLower().Contains(searchPhraseLower)))
+        .ToListAsync();
         return restaurants;
     }
 
