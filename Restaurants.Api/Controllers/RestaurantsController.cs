@@ -23,7 +23,7 @@ namespace Restaurants.Api.Controllers
         //[Authorize(Policy = PolicyNames.OwnsTwoRestaurants)]
         public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll([FromQuery] GetAllRestaurantsQuery? query)
         {
-            var resturaurants = await mediator.Send(query);
+            var resturaurants = await mediator.Send(query!);
             return Ok(resturaurants);
         }
 
@@ -36,7 +36,7 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = UserRoles.Owner)]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
         {
             int id = await mediator.Send(command);

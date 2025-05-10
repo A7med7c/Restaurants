@@ -6,7 +6,6 @@ using Restaurants.Domain.Entities;
 namespace Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
 
 public class OwnsTwoRestaurantsReqirementHandler(
-    ILogger<OwnsTwoRestaurantsReqirementHandler> logger,
     IRestaurantsRepository restaurantsRepository,
     IUserContext userContext) : AuthorizationHandler<OwnsTwoRestaurantsReqirement>
 {
