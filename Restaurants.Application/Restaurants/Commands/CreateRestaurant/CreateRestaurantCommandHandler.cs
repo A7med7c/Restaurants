@@ -17,7 +17,7 @@ public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandl
 
         //@ => make serilog print details of request
         logger.LogInformation("{UserEmail} [{UserId}] Creating a new Restaurant{@Restaurant}",
-            currentUser.Email, currentUser.Id, request);
+            currentUser!.Email, currentUser.Id, request);
 
         var restaurant = mapper.Map<Restaurant>(request);
         restaurant.OwnerId = currentUser.Id;
