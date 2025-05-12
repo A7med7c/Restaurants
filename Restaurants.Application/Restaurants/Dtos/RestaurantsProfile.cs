@@ -31,7 +31,14 @@ namespace Restaurants.Application.Restaurants.Dtos
                     Street = src.Street
                 }));
 
-            CreateMap<UpdateRestaurantCommand, Restaurant>();
+            CreateMap<UpdateRestaurantCommand, Restaurant>()
+                .ForMember(d => d.Address, opt =>
+                opt.MapFrom(src => new Address
+                {
+                    City = src.City,
+                    PostalCode = src.PostalCode,
+                    Street = src.Street
+                }));
         }
     }
 }

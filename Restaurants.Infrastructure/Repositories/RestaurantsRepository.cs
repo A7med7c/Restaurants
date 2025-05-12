@@ -8,10 +8,11 @@ using System.Linq.Expressions;
 namespace Restaurants.Infrastructure.Repositories;
 internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestaurantsRepository
 {
+
     public async Task<IEnumerable<Restaurant>> GetAllAsync()
     {
-        var restaurants = await dbContext.Restaurants
-            .ToListAsync();
+        var restaurants = await dbContext.Restaurants.ToListAsync();
+       
         return restaurants;
     }
     public async Task<(IEnumerable<Restaurant>,int)> GetAllMatchingAsync(string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection)
@@ -21,7 +22,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
         var baseQuery = dbContext
              .Restaurants
              .Where(r => searchPhraseLower == null || (r.Name.ToLower().Contains(searchPhraseLower)
-                                                    || r.Description.ToLower().Contains(searchPhraseLower)));
+                                                   || r.Description.ToLower().Contains(searchPhraseLower)));
         
         
         var totalCount = await baseQuery.CountAsync();
@@ -54,7 +55,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     public async Task<Restaurant?> GetByIdAsync(int id)
     {
         var restaurant = await dbContext.Restaurants
-            .Include(r => r.MenuCategories)
+            .Include(c => c.MenuCategories)
             .ThenInclude(d => d.Dishes)
             .FirstOrDefaultAsync(r => r.Id == id);
             
@@ -75,5 +76,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
         await dbContext.SaveChangesAsync();
     }
 
-    public  Task SaveChanges() => dbContext.SaveChangesAsync(); 
+    public  Task SaveChanges() => dbContext.SaveChangesAsync();
+
+    
 }

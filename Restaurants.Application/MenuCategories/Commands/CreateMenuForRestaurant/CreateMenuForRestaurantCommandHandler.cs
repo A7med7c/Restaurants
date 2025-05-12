@@ -18,7 +18,7 @@ public class CreateMenuForRestaurantCommandHandler(ILogger<CreateMenuForRestaura
 
         var menuCategory = mapper.Map<MenuCategory>(request);
 
-        return await menuCategoriesRepository.CreateAsync(menuCategory);
+        return await menuCategoriesRepository.AddAsync(menuCategory);
 
     }
 }

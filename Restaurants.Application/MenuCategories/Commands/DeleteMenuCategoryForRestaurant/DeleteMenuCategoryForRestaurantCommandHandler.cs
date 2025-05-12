@@ -30,7 +30,7 @@ public class DeleteMenuCategoryForRestaurantCommandHandler(
            .FirstOrDefault(mc => mc.Id == request.MenuCategoryId)
            ?? throw new NotFoundException(nameof(MenuCategory), request.MenuCategoryId.ToString());
 
-        await menuCategoriesRepository.DeleteAsync(menuCategory);
+        await menuCategoriesRepository.DeleteAsync(menuCategory.Id);
 
     }
 }
