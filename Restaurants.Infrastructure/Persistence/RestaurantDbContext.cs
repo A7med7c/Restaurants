@@ -15,27 +15,48 @@ namespace Restaurants.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Restaurant>()
-                .OwnsOne(r=>r.Address);
+            #region User 
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.OwnsOne(r => r.Address);
 
-            modelBuilder.Entity<User>()
+
+               entity.HasMany(r => r.Restaurants)
+                      .WithOne()
+                     .HasForeignKey(r => r.OwnerId);
+            });
+            #endregion
+
+            #region Restaurant 
+            modelBuilder.Entity<Restaurant>(entity =>
+            {
+                modelBuilder.Entity<Restaurant>()
                 .OwnsOne(r => r.Address);
 
+                modelBuilder.Entity<Restaurant>()
+              .HasMany(r => r.MenuCategories)
+              .WithOne()
+              .HasForeignKey(d => d.RestaurantId);
 
-            modelBuilder.Entity<Restaurant>()
-                 .HasMany(r => r.MenuCategories)
-                 .WithOne()
-                 .HasForeignKey(d => d.RestaurantId);
-         
-            modelBuilder.Entity<MenuCategory>()
-                 .HasMany(mc => mc.Dishes)
-                 .WithOne()
-                 .HasForeignKey(d => d.MenuCategoryId);
+                entity.HasMany(r => r.MenuCategories)
+                      .WithOne()
+                      .HasForeignKey(c => c.RestaurantId);
 
-            modelBuilder.Entity<User>()
-                  .HasMany(r => r.Restaurants)
-                  .WithOne()
-                 .HasForeignKey(r => r.OwnerId);
+                entity.HasMany(r => r.Dishes)
+                      .WithOne()
+                      .HasForeignKey(m => m.RestaurantId);
+            });
+            #endregion
+
+            #region Menu Category 
+            modelBuilder.Entity<MenuCategory>(entity =>
+            {
+
+                entity.HasMany(c => c.Dishes)
+                      .WithOne()
+                      .HasForeignKey(m => m.MenuCategoryId);
+            });
+            #endregion
 
         }
     }

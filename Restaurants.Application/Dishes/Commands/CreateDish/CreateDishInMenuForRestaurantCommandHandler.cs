@@ -26,6 +26,6 @@ public class CreateDishInMenuForRestaurantCommandHandler(
 
         var dish = mapper.Map<Dish>(request);
 
-        return await dishesRepository.CreateAsync(dish);
+        return await dishesRepository.AddAsync(dish);
     }
 }

@@ -21,6 +21,7 @@ namespace Restaurants.Domain.Entities
         public Address? Address { get; set; }
         public string OwnerId { get; set; } = default!;
         public List<MenuCategory> MenuCategories { get; set; } = new();
+        public List<Dish> Dishes { get; set; } = new();
       
     }
 }

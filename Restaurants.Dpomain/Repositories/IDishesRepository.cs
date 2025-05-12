@@ -2,7 +2,9 @@
 
 public interface IDishesRepository
 {
-    Task<int> CreateAsync(Dish entity);
-    Task DeleteAsync(Dish entity);
+    Task<IEnumerable<Dish>> GetAllAsync(int? restaurantId, int? menuCategoryId);
+    Task<Dish?> GetByIdAsync(int id);
+    Task<int> AddAsync(Dish entity);
+    Task DeleteAsync(int id);
     Task SaveChanges();
 }

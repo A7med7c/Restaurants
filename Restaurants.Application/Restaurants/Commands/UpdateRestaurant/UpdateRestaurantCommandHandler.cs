@@ -8,8 +8,8 @@ using Restaurants.Domain.Interfaces;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 public class UpdateRestaurantCommandHandler(
-    ILogger<UpdateRestaurantCommand> logger
-    , IRestaurantsRepository restaurantsRepository,
+    ILogger<UpdateRestaurantCommand> logger,
+    IRestaurantsRepository restaurantsRepository,
     IMapper mapper,
     IRestauratntAuthorizationServices restauratntAuthorizationServices) 
     : IRequestHandler<UpdateRestaurantCommand>

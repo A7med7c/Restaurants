@@ -33,6 +33,6 @@ public class DeleteDishesForRestaurantCommandHandler(
         var dish = menuCategory.Dishes.FirstOrDefault(d => d.Id == request.DishId)
            ?? throw new NotFoundException(nameof(Dish), request.DishId.ToString());
 
-          await dishesRepository.DeleteAsync(dish);
+          await dishesRepository.DeleteAsync(dish.Id);
     }
 }
