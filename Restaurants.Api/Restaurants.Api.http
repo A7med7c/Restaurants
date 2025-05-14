@@ -1,5 +1,8 @@
 @Restaurants.Api_HostAddress = https://localhost:7117
-@Token = CfDJ8AtTUCxZepRNtQjtfJx2wLnzkP5_6FA-oAFat_9wS7wpGdkIVupOqW-1Khl1QrzsN-ekf9_Jfj5S3epQ1LWlZCFcJ8V3NE2cxPCcavbceJlrYroco1Mm1Cd6O6L1KOm7FxCDXkIUT7XqGwbtoo9EzdDSteFufmzTWBZgBVcP9L8yzVe55Ahwe6wy7lpAi_xt_WAjnyVMVyitSCgUgZar2mMGN-9ovLA5cG1m-EnfG6lX0cvGOeDhLT-E0Azg9sU0xPhiPYZZUe0jRDNTDFGo3L8HPU4N_4N2ZY6FQJQBMJ7cYxaksfpZs7u0KQ1pzh_9Lo4Imx6Xm2zBQMuit3N-dpXQxoEmBsNYs_49d2J_Ddl9ZWnXd1GF1w59gqzjOlj0E5CmnQ5dGEuVsRApNL1iUuFCXSAr5Ax_LUbPzQXihhgsL60IdcEB_K2CCVhmxt8BOOGMNHhbJg9Eia6CdCPQs41K8eZ0HyMduE2pqwM0UJmWLayOCSvpUVD3pcZT0GrWv7LQO7sw4b_kVYPqnXbdhr6fmPf0U6nOCzg9MU_ombCXpS1uDEgFV-8RU5NAtlPc5MFA8Yl01CxTImjkddFZRBicn-m2UOKEMPkY3O6UYvirVbX8Ch9MXmwvRR2orYryzROzKR_-1GprX4rDiljwuxtSaat5xGnpu5_yZsPVj9ZaY21v_rjRTJbHE5yD5iZX2laeSM72us2OzPQCKaPr0PZPl_q89zvbatk0EyQ1PAykiOL_cACiSxkLlPCJElD_K2vCSmlfd4XexmsAhDCPy04tmbyOjJQ7EFPT2XLicQ4Lrx8VKCVlnP_nIVQVM8_nZI5L4-DULPqHvZlFMAfRlVnLDIdLHlvyIIv4knUaOAih95TcYk6F6r0bQ9h073Layw
+
+
+@Token =CfDJ8AtTUCxZepRNtQjtfJx2wLkSloDoU9q9bJ9y1HApXxsVDEdFq_lxrSsfpQtEuWl-bGMmUpAmUwXNsAxZdKl_BNjQ3IuaJXGCTzB0s6XzBQcZMDHim5gXBYC4ZjRlIJFGBiSCHDrfAEl-Pjhy7gltK2Zy6Br8pUzZy29Xc0JaNeed8Hfb7novRcdKRmlvL5SfxOWFznFKKaG0DlXKwuAOuq4MiQa3vmGY9kIctTYZtCPO1cys6UK9GUgZ5eNWYYJCjj4vBTcAY3wH7LP-HFlqMWDA-Vx_BeSkvi9fHmbf2FdI0s6RqSBYfnoNQXCv9Mggxzs2NFBC5jDOTceW3F3FFGxApfnnjiKdmfapTKtpGCMCyc9W8H8B7c8DISUJo6i4HxMHliT4Og0fKQQDs1jfz9PBPYHi8epnuius38aod7YJqU-rgvmfaVxV0eqePlJ9KOTVB5wEUdg653yjPPDCFoJXEDTYaowbZlcElTIL6CBiuGMkbx9bWgtPaxkdAKGY4RyErdDvpDKl6z3EQwiv5MIOuuInXydJb0ly5po9ocu5_c6UcR1dmlqqz0e4OAFsS1rKwegLE6x5ABNGymwy2sbuHrKAx30aadHcJKd1YhMBG4_0Mqp7cgSczkef-e_NZbEweAhb3EBtvAQovL3UgqomlE3K9x5mwJ0ZKWkej4pUTa-34qDTT9werT0jz9ID6dtfkXrsSK50W0MBOOeglq4Z4ei3r_Tca_gK_oTfFYRac3sIQvSiKVLKQKPbXUCS1gAT-uFY_BU2TsotDacMnwWl44cTRj3K4HsQHdsaHconWgGzJ51SDH7ZEZV237Cu0pjeBB42J7eHx6gYWK1KM_aezvfJ_yyPLCdGaBY4rb9FGuKuDZgA21ojghPX4_EJlw
+
 GET {{Restaurants.Api_HostAddress}}/api/restaurants?searchPhrase=&pageSize=10&pageNumber=1&sortBy=Name&sortDirection=Ascending
 ###
 
@@ -52,76 +55,37 @@ Content-Type: application/json
 POST {{Restaurants.API_HostAddress}}/api/identity/login
 Content-Type: application/json
 {
-  "email": "owner@test.com",
+  "email": "admin@test.com",
   "password": "Password1!"
 }
 ###
-GET {{Restaurants.API_HostAddress}}/api/manage/info
-Authorization: Bearer {{Token}}
-Content-Type: application/json
-###
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/1/menuCategories
-Authorization: Bearer {{Token}}
-###
-GET {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/9
-###
+
 @restaurantId=0
-DELETE {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories/3
+GET {{Restaurants.Api_HostAddress}}/api/menucategories/by-restaurant/1
+Authorization: Bearer {{Token}}
 
 ###
 
-POST {{Restaurants.Api_HostAddress}}/api/restaurant/2/menuCategories
-Content-Type: application/json
-
-{
- "name": "tester"
-}
+@id=0
+GET {{Restaurants.Api_HostAddress}}/api/menucategories/10
+Authorization: Bearer {{Token}}
 
 ###
 
-@dishId=0
-@menuCategoryId=0
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
+
+@id=0
+Delete {{Restaurants.Api_HostAddress}}/api/menucategories/10
+Authorization: Bearer {{Token}}
 
 ###
 
-POST {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes
+POST {{Restaurants.Api_HostAddress}}/api/menucategories
 Authorization: Bearer {{Token}}
 Content-Type: application/json
 
 {
-    "name": "tester",
-    "description": "tester",
-    "price": 10.00,
-    "kiloCalories": 110
-}
-
-###
-
-PATCH {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
-Authorization: Bearer {{Token}}
-Content-Type: application/json
-
-{  
-   "name": "hhhhh",
-    "description": "tester",
-    "price": 10.00,
-    "kiloCalories": 110
-}
-
-###
-
-DELETE {{Restaurants.Api_HostAddress}}/api/restaurants/1/menuCategories/1/dishes/7
-Authorization: Bearer {{Token}}
-###
-
-PATCH {{Restaurants.Api_HostAddress}}/api/identity/user
-Authorization: Bearer {{Token}}
-Content-Type: application/json
-
-{
-  "nationality": "Egyptian",
-  "DateOfBirth": "2002-02-02" 
+"name" : "testy",
+"restaurantId" : "1"
 }
 
 ###

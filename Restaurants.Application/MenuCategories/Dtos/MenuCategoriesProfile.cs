@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Restaurants.Application.MenuCategories.Commands.CreateMenuForRestaurant;
+using Restaurants.Application.MenuCategories.Commands.CreateMenuCategoryForRestaurant;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.MenuCategories.Dtos;
@@ -12,6 +12,6 @@ public class MenuCategoriesProfile : Profile
             .ForMember(d => d.Dishes, opt
             => opt.MapFrom(src => src.Dishes));
 
-        CreateMap<CreateMenuForRestaurantCommand, MenuCategory>();
+        CreateMap<CreateMenuCategoryForRestaurantCommand, MenuCategory>();
     }
 }

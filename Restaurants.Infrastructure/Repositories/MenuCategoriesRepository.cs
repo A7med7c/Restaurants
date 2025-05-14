@@ -7,22 +7,6 @@ namespace Restaurants.Infrastructure.Repositories;
 
 internal class MenuCategoriesRepository(RestaurantDbContext dbContext) : IMenuCategoriesRepository
 {
-    public async Task<IEnumerable<MenuCategory>> GetAllAsync(int? restaurantId)
-    {
-        var query = dbContext.MenuCategories.AsQueryable();
-       
-        if (restaurantId.HasValue)
-            query = query.Where(c => c.RestaurantId == restaurantId);
-       
-        return await query.ToListAsync();
-    }
-
-    public async Task<MenuCategory?> GetByIdAsync(int id)
-    {
-        return await dbContext.MenuCategories
-            .Include(d => d.Dishes)
-            .FirstOrDefaultAsync(c => c.Id == id);
-    }
     public async Task<int> AddAsync(MenuCategory entity)
     {
          dbContext.MenuCategories.Add(entity);
@@ -39,5 +23,10 @@ internal class MenuCategoriesRepository(RestaurantDbContext dbContext) : IMenuCa
             dbContext.MenuCategories.Remove(category);
             await dbContext.SaveChangesAsync();
         }
+    }
+
+    public async Task<MenuCategory> GetByIdAsync(int id)
+    {
+        return await dbContext.MenuCategories.FindAsync(id);
     }
 }
