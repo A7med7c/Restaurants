@@ -6,28 +6,7 @@ namespace Restaurants.Infrastructure.Repositories;
 
 internal class DishesRepository(RestaurantDbContext dbContext) : IDishesRepository
 {
-    public async Task<IEnumerable<Dish>> GetAllAsync(int? restaurantId, int? menuCategoryId)
-    {
-        var query = dbContext.Dishes.AsQueryable();
-
-        if (restaurantId.HasValue)
-            query = query.Where(r => r.RestaurantId == restaurantId); 
-        
-        if (menuCategoryId.HasValue)
-            query = query.Where(r => r.MenuCategoryId == menuCategoryId);
-        
-        var dishes = await query.ToListAsync();
-        
-        return dishes;
-
-    }
-
-    public async Task<Dish?> GetByIdAsync(int id)
-    {
-        var dish = await dbContext.Dishes.FirstOrDefaultAsync(d => d.Id == id);
-        
-        return dish;
-    }
+   
 
     public async Task<int> AddAsync(Dish entity)
     {

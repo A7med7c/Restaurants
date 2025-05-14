@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Restaurants.Application.MenuCategories.Commands.CreateMenuForRestaurant;
+using Restaurants.Application.MenuCategories.Commands.CreateMenuCategoryForRestaurant;
 using Restaurants.Application.MenuCategories.Commands.DeleteMenuCategoryForRestaurant;
 using Restaurants.Application.MenuCategories.Dtos;
 using Restaurants.Application.MenuCategories.Queries.GetMenuCategoriesForRestaurant;
@@ -9,42 +9,40 @@ using Restaurants.Application.MenuCategories.Queries.GetMenuCategoryForRestauran
 
 namespace Restaurants.Api.Controllers
 {
-    [Route("api/restaurant/{RestaurantId}/menuCategories")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class MenuCategoriesController(IMediator mediator) : ControllerBase
     {
-        [HttpGet]
-       // [Authorize(Policy = PolicyNames.AtLeast20)]
+        [HttpGet("by-restaurant/{restaurantId}")]
         public async Task<ActionResult<IEnumerable<MenuCategoriesDto>>> GetAllMenuCategoriesForRestaurant([FromRoute] int restaurantId)
         {
             var menuCategories = await mediator.Send(new GetMenuCategoriesForRestaurantQuery(restaurantId));
             return Ok(menuCategories);
         }
 
-        [HttpGet("{menuCategoryId}")]
-        public async Task<ActionResult<MenuCategoriesDto>> GetMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromRoute] int menuCategoryId)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MenuCategoriesDto>> GetMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromRoute] int id)
         {
-            var menuCategory = await mediator.Send(new GetMenuCategoryForRestaurantQuery(restaurantId, menuCategoryId));
+            var menuCategory = await mediator.Send(new GetMenuCategoryForRestaurantQuery(restaurantId, id));
             return Ok(menuCategory);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromBody] CreateMenuForRestaurantCommand command)
+        public async Task<IActionResult> CreateMenuCategoryForRestaurant( [FromBody] CreateMenuCategoryForRestaurantCommand command)
         {
-            command.RestaurantId = restaurantId;
-
             var menuCategoryId = await mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetMenuCategoryForRestaurant), new { restaurantId, menuCategoryId }, null);
+            return CreatedAtAction(nameof(GetMenuCategoryForRestaurant),
+                new { id = menuCategoryId }, null);
         }
 
-        [HttpDelete("{menuCategoryId}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteMenuCategoryForRestaurant([FromRoute] int restaurantId, [FromRoute] int menuCategoryId)
+        public async Task<IActionResult> DeleteMenuCategoryForRestaurant([FromRoute] int id)
         {
-            await mediator.Send(new DeleteMenuCategoryForRestaurantCommand(restaurantId, menuCategoryId));
+            await mediator.Send(new DeleteMenuCategoryForRestaurantCommand(id));
 
             return NoContent();
         }

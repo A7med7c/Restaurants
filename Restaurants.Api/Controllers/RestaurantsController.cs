@@ -14,12 +14,10 @@ namespace Restaurants.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class RestaurantsController(IMediator mediator) : ControllerBase
     {
 
         [HttpGet]
-       [AllowAnonymous]
         //[Authorize(Policy = PolicyNames.OwnsTwoRestaurants)]
         public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll([FromQuery] GetAllRestaurantsQuery? query)
         {
@@ -47,6 +45,7 @@ namespace Restaurants.Api.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, UpdateRestaurantCommand command)
         {
             //var restaurant = GetById(id);
@@ -60,6 +59,7 @@ namespace Restaurants.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] int id)
         {
              await mediator.Send(new DeleteRestaurantCommand(id));
