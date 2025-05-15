@@ -2,7 +2,6 @@
 using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistence;
-using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace Restaurants.Infrastructure.Repositories;
@@ -55,8 +54,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     public async Task<Restaurant?> GetByIdAsync(int id)
     {
         var restaurant = await dbContext.Restaurants
-            .Include(c => c.MenuCategories)
-            .ThenInclude(d => d.Dishes)
+            .Include(d => d.Dishes)
             .FirstOrDefaultAsync(r => r.Id == id);
             
         return restaurant;
@@ -76,7 +74,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
         await dbContext.SaveChangesAsync();
     }
 
+
     public  Task SaveChanges() => dbContext.SaveChangesAsync();
 
-    
 }

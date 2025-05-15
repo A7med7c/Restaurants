@@ -13,7 +13,7 @@ public class RestaurantDto
     public string? City { get; set; }
     public string? Street { get; set; }
     public string? PostalCode { get; set; }
-    public List<MenuCategory> MenuCategories { get; set; } = new();
+    public List<Dish> Dishes { get; set; } = new();
 
     //Manual Mapping
     //public static RestaurantDto? FromEntity(Restaurant? restaurant)

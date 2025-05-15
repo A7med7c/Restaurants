@@ -18,8 +18,8 @@ namespace Restaurants.Application.Restaurants.Dtos
                 opt.MapFrom(src => src.Address == null ? null : src.Address.PostalCode))
                 .ForMember(d => d.Street, opt =>
                 opt.MapFrom(src => src.Address == null ? null : src.Address.Street))
-                .ForMember(d => d.MenuCategories, opt =>
-                opt.MapFrom(src => src.MenuCategories));
+                .ForMember(d => d.Dishes, opt =>
+                opt.MapFrom(src => src.Dishes));
 
             // map from command to entity
             CreateMap<CreateRestaurantCommand, Restaurant>()
