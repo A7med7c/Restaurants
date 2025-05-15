@@ -1,12 +1,10 @@
 @Restaurants.Api_HostAddress = https://localhost:7117
-
-
-@Token =CfDJ8AtTUCxZepRNtQjtfJx2wLkSloDoU9q9bJ9y1HApXxsVDEdFq_lxrSsfpQtEuWl-bGMmUpAmUwXNsAxZdKl_BNjQ3IuaJXGCTzB0s6XzBQcZMDHim5gXBYC4ZjRlIJFGBiSCHDrfAEl-Pjhy7gltK2Zy6Br8pUzZy29Xc0JaNeed8Hfb7novRcdKRmlvL5SfxOWFznFKKaG0DlXKwuAOuq4MiQa3vmGY9kIctTYZtCPO1cys6UK9GUgZ5eNWYYJCjj4vBTcAY3wH7LP-HFlqMWDA-Vx_BeSkvi9fHmbf2FdI0s6RqSBYfnoNQXCv9Mggxzs2NFBC5jDOTceW3F3FFGxApfnnjiKdmfapTKtpGCMCyc9W8H8B7c8DISUJo6i4HxMHliT4Og0fKQQDs1jfz9PBPYHi8epnuius38aod7YJqU-rgvmfaVxV0eqePlJ9KOTVB5wEUdg653yjPPDCFoJXEDTYaowbZlcElTIL6CBiuGMkbx9bWgtPaxkdAKGY4RyErdDvpDKl6z3EQwiv5MIOuuInXydJb0ly5po9ocu5_c6UcR1dmlqqz0e4OAFsS1rKwegLE6x5ABNGymwy2sbuHrKAx30aadHcJKd1YhMBG4_0Mqp7cgSczkef-e_NZbEweAhb3EBtvAQovL3UgqomlE3K9x5mwJ0ZKWkej4pUTa-34qDTT9werT0jz9ID6dtfkXrsSK50W0MBOOeglq4Z4ei3r_Tca_gK_oTfFYRac3sIQvSiKVLKQKPbXUCS1gAT-uFY_BU2TsotDacMnwWl44cTRj3K4HsQHdsaHconWgGzJ51SDH7ZEZV237Cu0pjeBB42J7eHx6gYWK1KM_aezvfJ_yyPLCdGaBY4rb9FGuKuDZgA21ojghPX4_EJlw
+@Token =CfDJ8AtTUCxZepRNtQjtfJx2wLmq2i9Q7I9NoNivozrOm7tqWpI8IXIV-3Lmx2_i1qbgxvu20gOM1haLNZMhJZWeK677D1u_K8NXtjPTnV6iXMf8lCDLMsKiEQt1WNFAdJuQHxqoihRWVVNePsdehTUG8KPjsDsKTliM18gnYSbpBymHINJFzYoQDnhhxb5QdW22PbrVG4auzX37L4xyPz0e8uMkQ0y3VilzuB-qiB9xd6we-7Ts7PcslQB_2ggxCWAWxCBDm8DOXKr7jAWwL6DaY-KgjXbl1maDo7dK4IPnLHlqxqd6WyPv6jS-iCupZkcwlmv50wiuXnLF5VJQJxP8glW9NPmFdSnDcN8al72OwJU_BPm1ChQkzS8o-1_fQV22-jBlePx0zfPirrP-1TgO-lSkkkpQf6XfmJoSW57banh-Jzuyq6VJd67LhIWfbvfuhNO_3kLm7HiWiGBY_iBrJYVBZ2rXsLeKX7dwqn21t-HHgPmuvxiO4n96mGmuveDrOFq3d0-WDu7B8BqCyqclh56ty2myuiGRpyJ9JozIERhcJY5a9_w-8vvNl9kvu2_9dPLz5XMEOsH7gC0OkqfK0VPwR-kGZYsjr5TanX-87HqAD4Lpmg2teD-IPKFwFQEJSnxbmUhXcY61oRMBNeLoiCuFyxoukpB8fhGJO9-_P2IQDislWhrWu8UQbNxwTitEBeJVEgfjo7HuSTuZXSbg64YNi5K7W-W3NaBeK-4ufIaNARymAZm5WkHL5wml3jt5DUzA0U0Pg5H-BoQ6bVT-x1Tc8D-3MxRMNdPEN649MBqa0IXb5qtCxKOJXTS2n2S1JkNnOPDPt01q2vm-E4_q-zssulSpQbtC85Ub6VvLbZlrXt1POBxnJs_rlEzMncbEiA
 
 GET {{Restaurants.Api_HostAddress}}/api/restaurants?searchPhrase=&pageSize=10&pageNumber=1&sortBy=Name&sortDirection=Ascending
 ###
 
-GET {{Restaurants.Api_HostAddress}}/api/restaurants/8
+GET {{Restaurants.Api_HostAddress}}/api/restaurants/1
 ###
 
 POST {{Restaurants.API_HostAddress}}/api/restaurants
@@ -88,4 +86,78 @@ Content-Type: application/json
 "restaurantId" : "1"
 }
 
+###
+
+POST {{Restaurants.Api_HostAddress}}/api/dishes
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+{
+    "id": 5,
+    "name": "test55",
+    "description": "tester",
+    "price": 10.00,
+    "kiloCalories": 110,
+    "restaurantid": 1
+}
+
+###
+
+@categoryId=0
+GET {{Restaurants.Api_HostAddress}}/api/dishes/by-category/1
+Authorization: Bearer {{Token}}
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/dishes/by-restaurant/1
+Authorization: Bearer {{Token}}
+
+###
+
+DELETE {{Restaurants.Api_HostAddress}}/api/dishes/17
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/dishes/{{id}}
+
+###
+
+PATCH {{Restaurants.Api_HostAddress}}/api/dishes/17
+Content-Type: application/json
+
+{
+  "name": "test ee Chicken",
+    "description": "e Hot hh (10 pcs.)",
+    "price": 10.30,
+    "kiloCalories": null,
+    "restaurantId": 1,
+    "menuCategoryId": 1
+
+}
+
+###
+Post {{Restaurants.Api_HostAddress}}/api/dishes
+Content-Type: application/json
+
+{
+  "name": "test ee Chicken",
+    "description": "e Hot Chicken (10 pcs.)",
+    "price": 10.30,
+    "kiloCalories": null,
+    "restaurantId": 1,
+    "menuCategoryId": 1
+}
+
+###
+
+PUT {{Restaurants.Api_HostAddress}}/api/restaurants/2/dishes/18
+Content-Type: application/json
+
+{
+ "name": "hello",
+  "description": "Hello Tester",
+  "price": 100,
+  "kiloCalories": 11,
+  "restaurantid" : 2
+}
 ###

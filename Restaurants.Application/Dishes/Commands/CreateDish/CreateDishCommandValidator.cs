@@ -2,7 +2,7 @@
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
 
-public class CreateDishCommandValidator : AbstractValidator<CreateDishInMenuForRestaurantCommand>
+public class CreateDishCommandValidator : AbstractValidator<CreateDishForRestaurantCommand>
 {
     public CreateDishCommandValidator()
     {

@@ -11,9 +11,9 @@ public class DishesProfile : Profile
         CreateMap<Dish, DishesDto>();
 
 
-        CreateMap<CreateDishInMenuForRestaurantCommand, Dish>();
+        CreateMap<CreateDishForRestaurantCommand, Dish>();
 
-        CreateMap<UpdateDishInMenuForRestaurantCommand, Dish>();
+        CreateMap<UpdateForRestaurantCommand, Dish>();
      
 
     }

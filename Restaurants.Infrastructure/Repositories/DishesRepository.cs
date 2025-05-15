@@ -6,8 +6,6 @@ namespace Restaurants.Infrastructure.Repositories;
 
 internal class DishesRepository(RestaurantDbContext dbContext) : IDishesRepository
 {
-   
-
     public async Task<int> AddAsync(Dish entity)
     {
         dbContext.Dishes.Add(entity);
@@ -25,6 +23,5 @@ internal class DishesRepository(RestaurantDbContext dbContext) : IDishesReposito
             await dbContext.SaveChangesAsync();
         }
     }
-
     public Task SaveChanges() => dbContext.SaveChangesAsync();
 }

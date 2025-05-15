@@ -2,12 +2,11 @@
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
 
-public class CreateDishInMenuForRestaurantCommand : IRequest<int>
+public class CreateDishForRestaurantCommand : IRequest<int>
 {
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
     public decimal Price { get; set; }
     public int? KiloCalories { get; set; }
     public int RestaurantId { get; set; }
-    public int MenuCategoryId { get; set; }
 }

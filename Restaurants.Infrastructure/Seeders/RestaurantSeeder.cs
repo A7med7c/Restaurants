@@ -54,74 +54,63 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
 
     private IEnumerable<Restaurant> GetRestaurants()
     {
-        return new List<Restaurant>
+        User owner = new User()
         {
+            Email = "seed-user@test.com"
+        };
+
+        List<Restaurant> restaurants = [
             new()
             {
+                Owner = owner,
                 Name = "KFC",
                 Category = "Fast Food",
-                Description = "KFC (short for Kentucky Fried Chicken)...",
+                Description =
+                    "KFC (short for Kentucky Fried Chicken) is an American fast food restaurant chain headquartered in Louisville, Kentucky, that specializes in fried chicken.",
                 ContactEmail = "contact@kfc.com",
                 HasDelivery = true,
-                Address = new Address
+                Dishes =
+                [
+                    new ()
+                    {
+                        Name = "Nashville Hot Chicken",
+                        Description = "Nashville Hot Chicken (10 pcs.)",
+                        Price = 10.30M,
+                    },
+
+                    new ()
+                    {
+                        Name = "Chicken Nuggets",
+                        Description = "Chicken Nuggets (5 pcs.)",
+                        Price = 5.30M,
+                    },
+                ],
+                Address = new ()
                 {
                     City = "London",
                     Street = "Cork St 5",
                     PostalCode = "WC2N 5DU"
                 },
-                MenuCategories = new List<MenuCategory>
-                {
-                    new()
-                    {
-                        Name = "Fried Chicken",
-                        Dishes = new List<Dish>
-                        {
-                            new()
-                            {
-                                Name = "Nashville Hot Chicken",
-                                Description = "Nashville Hot Chicken (10 pcs.)",
-                                Price = 10.30M
-                            },
-                            new()
-                            {
-                                Name = "Chicken Nuggets",
-                                Description = "Chicken Nuggets (5 pcs.)",
-                                Price = 5.30M
-                            }
-                        }
-                    }
-                }
+
             },
-            new()
+            new ()
             {
+                Owner = owner,
                 Name = "McDonald",
                 Category = "Fast Food",
-                Description = "McDonald's Corporation...",
+                Description =
+                    "McDonald's Corporation (McDonald's), incorporated on December 21, 1964, operates and franchises McDonald's restaurants.",
                 ContactEmail = "contact@mcdonald.com",
                 HasDelivery = true,
-                Address = new Address
+                Address = new Address()
                 {
                     City = "London",
                     Street = "Boots 193",
                     PostalCode = "W1F 8SR"
-                },
-                MenuCategories = new List<MenuCategory>
-                {
-                    new()
-                    {
-                        Name = "Burgers",
-                        Dishes = new List<Dish>
-                        {
-                            new()
-                            {
-                                Name = "Big Mac",
-                                Description = "Classic Big Mac Burger",
-                                Price = 8.50M
-                            }
-                        }
-                    }
                 }
             }
-        };
+        ];
+
+        return restaurants;
     }
 }

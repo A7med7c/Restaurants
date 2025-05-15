@@ -2,7 +2,7 @@
 
 namespace Restaurants.Application.Dishes.Commands.UpdateDish;
 
-public class UpdateDishCommandValidator : AbstractValidator<UpdateDishInMenuForRestaurantCommand>
+public class UpdateDishCommandValidator : AbstractValidator<UpdateForRestaurantCommand>
 {
     public UpdateDishCommandValidator()
     {
