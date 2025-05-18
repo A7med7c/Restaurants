@@ -12,6 +12,7 @@ using Restaurants.Domain.Interfaces;
 using Restaurants.Infrastructure.Authorization.Services;
 using Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
 using Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
+using Restaurants.Domain.Repositories;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -47,6 +48,8 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.AddScoped<IDishesRepository, DishesRepository>();
+            services.AddScoped<IOrdersRepository, OrdersRepository>();
+
 
             services.AddScoped<IRestauratntAuthorizationServices, RestauratntAuthorizationServices>();
 

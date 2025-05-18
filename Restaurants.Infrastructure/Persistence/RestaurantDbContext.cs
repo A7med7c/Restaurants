@@ -9,6 +9,8 @@ namespace Restaurants.Infrastructure.Persistence
 
         internal DbSet<Restaurant> Restaurants { get; set; }
         internal DbSet<Dish> Dishes { get; set; }
+        internal DbSet<Order> Orders { get; set; }
+        internal DbSet<OrderItem> Items { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +25,12 @@ namespace Restaurants.Infrastructure.Persistence
                entity.HasMany(r => r.Restaurants)
                       .WithOne(o => o.Owner)
                      .HasForeignKey(r => r.OwnerId);
+
+                entity.HasMany(o => o.Orders)
+                 .WithOne(c => c.Customer)
+                 .HasForeignKey(c => c.CustomerId);
             });
+
             #endregion
 
             #region Restaurant 
@@ -39,6 +46,14 @@ namespace Restaurants.Infrastructure.Persistence
             });
             #endregion
 
-        }
+            #region Order 
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasMany(i => i.Items)
+                .WithOne(o => o.Order)
+                .HasForeignKey(o => o.OrderId);
+            });
+                #endregion
+            }
     }
 }
