@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using Restaurants.Domain.Constants;
+using Restaurants.Application.Orders.Dtos;
 
 namespace Restaurants.Application.Orders.Commands;
 
 public class CreateOrderCommand : IRequest<int>
 {
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public OrderStatus Status { get; set; } = OrderStatus.Pending;
+    public List<OrderItemDto> Items { get; set; } = new();
 }
