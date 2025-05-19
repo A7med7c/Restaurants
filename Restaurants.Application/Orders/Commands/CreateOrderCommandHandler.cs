@@ -21,9 +21,12 @@ public class CreateOrderCommandHandler(
         logger.LogInformation("{UserEmail} [{UserId}] Creating a new Order{@Order}",
             currentUser!.Email, currentUser.Id, request);
 
-        var order = mapper.Map<Order>(request);
-        
-        order.CustomerId = currentUser.Id;
+        var order = new Order { CustomerId = currentUser.Id };
+        foreach (var itemDto in request.Items)
+        {
+            var item = mapper.Map<OrderItem>(itemDto);
+            order.AddItem(item);
+        }
 
         await ordersRepository.AddAsync(order);
 

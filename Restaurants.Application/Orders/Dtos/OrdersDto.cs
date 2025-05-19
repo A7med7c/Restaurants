@@ -1,23 +1,14 @@
 ﻿using Restaurants.Domain.Constants;
-using System.ComponentModel.DataAnnotations.Schema;
+using Restaurants.Domain.Entities;
 
-namespace Restaurants.Domain.Entities;
+namespace Restaurants.Application.Orders.Dtos;
 
-public class Order
+public class OrdersDto
 {
     public int Id { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
-    [NotMapped]
     public decimal TotalAmount { get; private set; }
     public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
     public string CustomerId { get; set; } = default!;
-    public User Customer { get; set; } = default!;
-
-    public void AddItem(OrderItem item)
-    {
-        Items.Add(item);
-        TotalAmount += item.Price * item.Quantity;
-    }
-
 }

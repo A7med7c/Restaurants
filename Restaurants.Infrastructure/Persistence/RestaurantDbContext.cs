@@ -54,6 +54,7 @@ namespace Restaurants.Infrastructure.Persistence
                 .HasForeignKey(o => o.OrderId);
             });
                 #endregion
-            }
+
+        }
     }
 }
