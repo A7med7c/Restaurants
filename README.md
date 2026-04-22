@@ -22,7 +22,7 @@ A layered ASP.NET Core Web API for managing restaurants, dishes, orders, and use
 ## Project Structure
 - `Restaurants.Api` — API host, controllers, middleware, and configuration
 - `Restaurants.Application` — application logic, CQRS handlers, validators, DTOs
-- `Restaurants.Dpomain` — domain entities, constants, and interfaces
+- `Restaurants.Domain` (folder `Restaurants.Dpomain`) — domain entities, constants, and interfaces
 - `Restaurants.Infrastructure` — EF Core context, repositories, seeding, authorization services
 
 ## Getting Started
