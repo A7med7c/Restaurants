@@ -17,12 +17,20 @@ namespace Restaurants.Api.Controllers
             var order = await mediator.Send(new GetOrderByIdQuery(id));
             return Ok(order);
         }
-        
-        [HttpPost] 
+
+        [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
             int id = await mediator.Send(command);
             return CreatedAtAction(nameof(GetOrderById), new { id }, null);
+        }
+
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusCommand command)
+        {
+            command.Id = id;
+            await mediator.Send(command);
+            return NoContent();
         }
 
     }
