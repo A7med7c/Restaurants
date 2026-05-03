@@ -9,6 +9,9 @@ public class Order
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; private set; } = DateTime.UtcNow;
     public OrderStatus Status { get; private set; } = OrderStatus.Pending;
+    public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cash;
+    public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
+    public string? PaymentReference { get; set; }
     [NotMapped]
     public decimal TotalAmount { get; private set; }
     public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();

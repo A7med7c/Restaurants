@@ -1,6 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Restaurants.Api.Middlewares;
 using Serilog;
+using System.Text.Json.Serialization;
 
 namespace Restaurants.Api.Extensions
 {
@@ -10,13 +11,17 @@ namespace Restaurants.Api.Extensions
         {
             builder.Services.AddAuthentication();
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(c =>
             {
-                c.AddSecurityDefinition("bearerAuth",new OpenApiSecurityScheme
+                c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
                     Scheme = "Bearer"
@@ -34,9 +39,9 @@ namespace Restaurants.Api.Extensions
             });
 
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
-            
+
             builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
-          
+
             builder.Host.UseSerilog((context, configuration) =>
              configuration.ReadFrom.Configuration(context.Configuration));
 

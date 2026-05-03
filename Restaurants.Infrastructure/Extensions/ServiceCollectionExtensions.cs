@@ -13,6 +13,8 @@ using Restaurants.Infrastructure.Authorization.Services;
 using Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
 using Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
 using Restaurants.Domain.Repositories;
+using Restaurants.Application.Payments;
+using Restaurants.Infrastructure.Payments;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -49,12 +51,16 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.AddScoped<IDishesRepository, DishesRepository>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.Configure<PaymobSettings>(configuration.GetSection("Paymob"));
+            services.AddHttpClient();
+            services.AddScoped<IPaymentService, PaymobPaymentService>();
 
 
             services.AddScoped<IRestauratntAuthorizationServices, RestauratntAuthorizationServices>();
 
 
-           
+
         }
     }
 }
