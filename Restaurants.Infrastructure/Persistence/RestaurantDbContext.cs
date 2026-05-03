@@ -11,6 +11,8 @@ namespace Restaurants.Infrastructure.Persistence
         internal DbSet<Dish> Dishes { get; set; }
         internal DbSet<Order> Orders { get; set; }
         internal DbSet<OrderItem> Items { get; set; }
+        internal DbSet<Cart> Carts { get; set; }
+        internal DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,9 +24,9 @@ namespace Restaurants.Infrastructure.Persistence
                 entity.OwnsOne(r => r.Address);
 
 
-               entity.HasMany(r => r.Restaurants)
-                      .WithOne(o => o.Owner)
-                     .HasForeignKey(r => r.OwnerId);
+                entity.HasMany(r => r.Restaurants)
+                       .WithOne(o => o.Owner)
+                      .HasForeignKey(r => r.OwnerId);
 
                 entity.HasMany(o => o.Orders)
                  .WithOne(c => c.Customer)
@@ -39,7 +41,7 @@ namespace Restaurants.Infrastructure.Persistence
                 modelBuilder.Entity<Restaurant>()
                 .OwnsOne(r => r.Address);
 
-               
+
                 entity.HasMany(r => r.Dishes)
                    .WithOne()
                    .HasForeignKey(m => m.RestaurantId);
@@ -53,7 +55,30 @@ namespace Restaurants.Infrastructure.Persistence
                 .WithOne(o => o.Order)
                 .HasForeignKey(o => o.OrderId);
             });
-                #endregion
+            #endregion
+
+            #region Cart
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasMany(c => c.Items)
+                    .WithOne(i => i.Cart)
+                    .HasForeignKey(i => i.CartId);
+
+                entity.HasOne(c => c.User)
+                    .WithMany()
+                    .HasForeignKey(c => c.UserId);
+
+                entity.HasIndex(c => c.UserId)
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<CartItem>(entity =>
+            {
+                entity.HasOne(i => i.Dish)
+                    .WithMany()
+                    .HasForeignKey(i => i.DishId);
+            });
+            #endregion
 
         }
     }

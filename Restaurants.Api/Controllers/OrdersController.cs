@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Orders.Commands;
@@ -9,6 +10,7 @@ namespace Restaurants.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController(IMediator mediator) : ControllerBase
     {
         [HttpGet("{id}")]
@@ -23,6 +25,13 @@ namespace Restaurants.Api.Controllers
         {
             int id = await mediator.Send(command);
             return CreatedAtAction(nameof(GetOrderById), new { id }, null);
+        }
+
+        [HttpPost("checkout")]
+        public async Task<ActionResult<CheckoutResultDto>> Checkout([FromBody] CheckoutCommand command)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPatch("{id}/status")]
