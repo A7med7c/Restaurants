@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Api", "Restaurants.Api\Restaurants.Api.csproj", "{BFD8D27B-5034-4108-9C7F-5DB85CECAB05}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application", "Restaurants.Application\Restaurants.Application.csproj", "{DE6ADD03-53CA-48D5-94AB-845A10AACB1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Infrastructure", "Restaurants.Infrastructure\Restaurants.Infrastructure.csproj", "{B010022A-C837-41CD-927C-CAD3CFD6EA04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application.Tests", "Restaurants.Application.Tests\Restaurants.Application.Tests.csproj", "{92EBFD80-34A8-4F9E-BAD9-06CA36AA1E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B010022A-C837-41CD-927C-CAD3CFD6EA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B010022A-C837-41CD-927C-CAD3CFD6EA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B010022A-C837-41CD-927C-CAD3CFD6EA04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92EBFD80-34A8-4F9E-BAD9-06CA36AA1E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92EBFD80-34A8-4F9E-BAD9-06CA36AA1E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92EBFD80-34A8-4F9E-BAD9-06CA36AA1E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92EBFD80-34A8-4F9E-BAD9-06CA36AA1E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

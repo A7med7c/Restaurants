@@ -18,8 +18,7 @@ internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestauran
     {
         var searchPhraseLower = searchPhrase?.ToLower();
         
-        var baseQuery = dbContext
-             .Restaurants
+        var baseQuery = dbContext.Restaurants
              .Where(r => searchPhraseLower == null || (r.Name.ToLower().Contains(searchPhraseLower)
                                                    || r.Description.ToLower().Contains(searchPhraseLower)));
         
