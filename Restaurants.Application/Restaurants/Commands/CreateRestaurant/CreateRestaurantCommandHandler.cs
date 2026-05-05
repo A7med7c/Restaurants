@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Users;
 using Restaurants.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandler> logger,
