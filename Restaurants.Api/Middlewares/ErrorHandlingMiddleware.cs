@@ -1,4 +1,5 @@
 ﻿
+using System.Text.Json;
 using Restaurants.Domain.Exceptions;
 
 namespace Restaurants.Api.Middlewares;
@@ -13,22 +14,47 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
         }
         catch (NotFoundException notFound)
         {
-            logger.LogError(notFound.Message);
+            logger.LogWarning(notFound, "Requested resource was not found.");
 
-            context.Response.StatusCode = 404;
-            await context.Response.WriteAsync(notFound.Message);
+            await WriteErrorResponse(context, StatusCodes.Status404NotFound, notFound.Message);
         }
         catch (ForbiddenException)
         {
-            context.Response.StatusCode = 403;
-            await context.Response.WriteAsync("Access forbidden");
+            logger.LogWarning("Forbidden request to {Method} {Path}.", context.Request.Method, context.Request.Path);
+
+            await WriteErrorResponse(context, StatusCodes.Status403Forbidden, "Access forbidden");
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, ex.Message);
+            logger.LogError(
+                ex,
+                "Unhandled exception while processing {Method} {Path}.",
+                context.Request.Method,
+                context.Request.Path);
 
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsync(ex.Message);
+            await WriteErrorResponse(
+                context,
+                StatusCodes.Status500InternalServerError,
+                "An unexpected error occurred. Please contact support.");
         }
+    }
+
+    private static async Task WriteErrorResponse(HttpContext context, int statusCode, string message)
+    {
+        if (context.Response.HasStarted)
+        {
+            return;
+        }
+
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = statusCode;
+
+        var response = JsonSerializer.Serialize(new
+        {
+            statusCode,
+            message
+        });
+
+        await context.Response.WriteAsync(response);
     }
 }

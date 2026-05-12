@@ -10,22 +10,31 @@ internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeed
 {
     public async Task Seed()
     {
-        if (await dbContext.Database.CanConnectAsync())
-        {
-           
-            if (!dbContext.Restaurants.Any())
-            {
-                var restaurants = GetRestaurants();
-                dbContext.Restaurants.AddRange(restaurants);
-                await dbContext.SaveChangesAsync();
-            }
+        var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
 
-            if (!dbContext.Roles.Any())
-            {
-                var roles = GetRoles();
-                dbContext.Roles.AddRange(roles);
-                await dbContext.SaveChangesAsync();
-            }
+        if (pendingMigrations.Any())
+        {
+            await dbContext.Database.MigrateAsync();
+        }
+
+        if (!await dbContext.Database.CanConnectAsync())
+        {
+            throw new InvalidOperationException(
+                "Cannot connect to the database configured by connection string 'RestaurantsDb'.");
+        }
+
+        if (!await dbContext.Restaurants.AnyAsync())
+        {
+            var restaurants = GetRestaurants();
+            dbContext.Restaurants.AddRange(restaurants);
+            await dbContext.SaveChangesAsync();
+        }
+
+        if (!await dbContext.Roles.AnyAsync())
+        {
+            var roles = GetRoles();
+            dbContext.Roles.AddRange(roles);
+            await dbContext.SaveChangesAsync();
         }
     }
 

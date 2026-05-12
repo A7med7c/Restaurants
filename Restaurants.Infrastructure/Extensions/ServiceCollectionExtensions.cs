@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Data.SqlClient;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistence;
 using Restaurants.Infrastructure.Repositories;
@@ -24,9 +25,9 @@ namespace Restaurants.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var ConnectionString = configuration.GetConnectionString("RestaurantsDb");
+            var connectionString = GetValidatedConnectionString(configuration);
             services.AddDbContext<RestaurantDbContext>(options =>
-            options.UseSqlServer(ConnectionString)
+            options.UseSqlServer(connectionString)
                    .EnableSensitiveDataLogging()
 
             );
@@ -59,8 +60,30 @@ namespace Restaurants.Infrastructure.Extensions
 
             services.AddScoped<IRestauratntAuthorizationServices, RestauratntAuthorizationServices>();
 
+        }
 
+        private static string GetValidatedConnectionString(IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("RestaurantsDb");
 
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException(
+                    "Connection string 'RestaurantsDb' is missing. Add it under the 'ConnectionStrings' section.");
+            }
+
+            try
+            {
+                _ = new SqlConnectionStringBuilder(connectionString);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new InvalidOperationException(
+                    "Connection string 'RestaurantsDb' is invalid. Please check the SQL Server configuration value.",
+                    ex);
+            }
+
+            return connectionString;
         }
     }
 }
