@@ -350,6 +350,9 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+# Ignore local development appsettings that can contain secrets
+Restaurants.Api/appsettings.Development.json
+
 # BeatPulse healthcheck temp database
 healthchecksdb
 
