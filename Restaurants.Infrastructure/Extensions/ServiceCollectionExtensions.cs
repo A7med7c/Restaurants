@@ -1,21 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Data.SqlClient;
+using Restaurants.Application.Payments;
 using Restaurants.Domain.Entities;
+using Restaurants.Domain.Interfaces;
+using Restaurants.Domain.Repositories;
+using Restaurants.Infrastructure.Authorization;
+using Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
+using Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
+using Restaurants.Infrastructure.Authorization.Services;
+using Restaurants.Infrastructure.Configurations;
+using Restaurants.Infrastructure.Payments;
 using Restaurants.Infrastructure.Persistence;
 using Restaurants.Infrastructure.Repositories;
 using Restaurants.Infrastructure.Seeders;
-using Microsoft.AspNetCore.Identity;
-using Restaurants.Infrastructure.Authorization;
-using Microsoft.AspNetCore.Authorization;
-using Restaurants.Domain.Interfaces;
-using Restaurants.Infrastructure.Authorization.Services;
-using Restaurants.Infrastructure.Authorization.Requirements.MinimumAge;
-using Restaurants.Infrastructure.Authorization.Requirements.OwnsTwoRestaurants;
-using Restaurants.Domain.Repositories;
-using Restaurants.Application.Payments;
-using Restaurants.Infrastructure.Payments;
 
 
 namespace Restaurants.Infrastructure.Extensions
@@ -59,6 +60,8 @@ namespace Restaurants.Infrastructure.Extensions
 
 
             services.AddScoped<IRestauratntAuthorizationServices, RestauratntAuthorizationServices>();
+            services.Configure<BlobStorageSettings>(configuration.GetSection("BlobStorage"));
+            services.AddScoped<IBlobStorageService, BlobStorageService>();
 
         }
 

@@ -1,4 +1,4 @@
-namespace Restaurants.Infrastructure.Payments;
+namespace Restaurants.Infrastructure.Configurations;
 
 public class PaymobSettings
 {

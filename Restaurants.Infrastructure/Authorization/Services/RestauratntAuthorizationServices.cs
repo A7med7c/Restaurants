@@ -14,7 +14,7 @@ public class RestauratntAuthorizationServices(
     {
         var currentUser = userContext.GetCurrentUser();
 
-        logger.LogInformation("Authorizing user {UserEmail} : to operation {Operation} fro restaurant {RestaurantName}",
+        logger.LogInformation("Authorizing user {UserEmail} : to operation {Operation} for restaurant {RestaurantName}",
             currentUser!.Email, resourceOperation, restaurant);
 
         if (resourceOperation == ResourceOperation.Read || resourceOperation == ResourceOperation.Create)

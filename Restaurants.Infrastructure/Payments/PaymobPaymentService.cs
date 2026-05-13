@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using Restaurants.Application.Payments;
 using Restaurants.Domain.Entities;
+using Restaurants.Infrastructure.Configurations;
 
 namespace Restaurants.Infrastructure.Payments;
 
