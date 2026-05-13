@@ -2,5 +2,5 @@
 
 public interface IBlobStorageService
 {
-    public Task<string> UploadToBlobAsync(Stream data, string fileName);
+    public Task<string> UploadToBlobAsync(Stream data, string fileName, CancellationToken cancellationToken = default);
 }

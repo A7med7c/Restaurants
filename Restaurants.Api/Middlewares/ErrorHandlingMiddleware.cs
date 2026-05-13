@@ -24,6 +24,19 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
 
             await WriteErrorResponse(context, StatusCodes.Status403Forbidden, "Access forbidden");
         }
+        catch (ExternalStorageException storageException)
+        {
+            logger.LogError(
+                storageException,
+                "External storage failed while processing {Method} {Path}.",
+                context.Request.Method,
+                context.Request.Path);
+
+            await WriteErrorResponse(
+                context,
+                StatusCodes.Status503ServiceUnavailable,
+                storageException.Message);
+        }
         catch (Exception ex)
         {
             logger.LogError(

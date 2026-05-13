@@ -22,7 +22,7 @@ internal class UploadRestaurantLogoCommandHandler(ILogger<UploadRestaurantLogoCo
         if (!restauratntAuthorizationServices.IsAuthorize(ResourceOperation.Update, restaurant))
             throw new ForbiddenException();
 
-        var logoUrl = await blobStorageService.UploadToBlobAsync(request.FileContent, request.FileName);
+        var logoUrl = await blobStorageService.UploadToBlobAsync(request.FileContent, request.FileName, cancellationToken);
 
         restaurant.LogoUrl = logoUrl;
         await restaurantsRepository.SaveChanges();

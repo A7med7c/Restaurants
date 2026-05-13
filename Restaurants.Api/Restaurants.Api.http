@@ -1,4 +1,4 @@
-@Restaurants.Api_HostAddress = https://localhost:7117
+@Restaurants.Api_HostAddress = https://localhost:44371
 @Token =CfDJ8AtTUCxZepRNtQjtfJx2wLmq2i9Q7I9NoNivozrOm7tqWpI8IXIV-3Lmx2_i1qbgxvu20gOM1haLNZMhJZWeK677D1u_K8NXtjPTnV6iXMf8lCDLMsKiEQt1WNFAdJuQHxqoihRWVVNePsdehTUG8KPjsDsKTliM18gnYSbpBymHINJFzYoQDnhhxb5QdW22PbrVG4auzX37L4xyPz0e8uMkQ0y3VilzuB-qiB9xd6we-7Ts7PcslQB_2ggxCWAWxCBDm8DOXKr7jAWwL6DaY-KgjXbl1maDo7dK4IPnLHlqxqd6WyPv6jS-iCupZkcwlmv50wiuXnLF5VJQJxP8glW9NPmFdSnDcN8al72OwJU_BPm1ChQkzS8o-1_fQV22-jBlePx0zfPirrP-1TgO-lSkkkpQf6XfmJoSW57banh-Jzuyq6VJd67LhIWfbvfuhNO_3kLm7HiWiGBY_iBrJYVBZ2rXsLeKX7dwqn21t-HHgPmuvxiO4n96mGmuveDrOFq3d0-WDu7B8BqCyqclh56ty2myuiGRpyJ9JozIERhcJY5a9_w-8vvNl9kvu2_9dPLz5XMEOsH7gC0OkqfK0VPwR-kGZYsjr5TanX-87HqAD4Lpmg2teD-IPKFwFQEJSnxbmUhXcY61oRMBNeLoiCuFyxoukpB8fhGJO9-_P2IQDislWhrWu8UQbNxwTitEBeJVEgfjo7HuSTuZXSbg64YNi5K7W-W3NaBeK-4ufIaNARymAZm5WkHL5wml3jt5DUzA0U0Pg5H-BoQ6bVT-x1Tc8D-3MxRMNdPEN649MBqa0IXb5qtCxKOJXTS2n2S1JkNnOPDPt01q2vm-E4_q-zssulSpQbtC85Ub6VvLbZlrXt1POBxnJs_rlEzMncbEiA
 
 GET {{Restaurants.Api_HostAddress}}/api/restaurants?searchPhrase=&pageSize=10&pageNumber=1&sortBy=Name&sortDirection=Ascending
@@ -166,7 +166,11 @@ POST {{Restaurants.Api_HostAddress}}/api/restaurants/{id}/logos
 Content-Type: application/json
 
 {
-  //IFormFile
+  //IFormFile 
 }
+
+###
+
+GET {{Restaurants.Api_HostAddress}}/api/cart
 
 ###

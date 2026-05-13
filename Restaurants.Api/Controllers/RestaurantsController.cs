@@ -43,16 +43,17 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost("{id}/logos")]
-        [Consumes("multipart/form-data")]
         [Authorize]
-        public async Task<IActionResult> UploadRestaurantLogo([FromRoute] int id, [FromForm] IFormFile file)
+        [Consumes("multipart/form-data")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        public async Task<IActionResult> UploadRestaurantLogo([FromRoute] int id, IFormFile file)
         {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("A logo file is required.");
-            }
+            if (file is null || file.Length == 0)
+                return BadRequest("Logo file is required.");
 
-            using var stream = file.OpenReadStream();
+            await using var stream = file.OpenReadStream();
             var command = new UploadRestaurantLogoCommand()
             {
                 RestaurantId = id,
@@ -68,7 +69,7 @@ namespace Restaurants.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = UserRoles.Owner)]
-        public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, UpdateRestaurantCommand command)
+        public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, [FromBody] UpdateRestaurantCommand command)
         {
             //var restaurant = GetById(id);
             //bind id 

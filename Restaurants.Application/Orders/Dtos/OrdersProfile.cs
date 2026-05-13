@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Restaurants.Application.Orders.Commands;
 using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
@@ -14,8 +14,10 @@ public class OrdersProfile : Profile
                 .ForMember(dest => dest.TotalAmount, opt => opt.Ignore()) 
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
 
-        // Map OrderItemDto to OrderItem
         CreateMap<OrderItemDto, OrderItem>();
+
+ 
+        CreateMap<OrderItem, OrderItemDto>();
         
         // Map Order to OrderItem
         CreateMap<Order,OrdersDto>()
