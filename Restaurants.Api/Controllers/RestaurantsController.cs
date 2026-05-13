@@ -43,13 +43,20 @@ namespace Restaurants.Api.Controllers
         }
 
         [HttpPost("{id}/logos")]
-        public async Task<IActionResult> UploadRestaurantLogo([FromRoute] int id, IFormFile file)
+        [Consumes("multipart/form-data")]
+        [Authorize]
+        public async Task<IActionResult> UploadRestaurantLogo([FromRoute] int id, [FromForm] IFormFile file)
         {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("A logo file is required.");
+            }
+
             using var stream = file.OpenReadStream();
             var command = new UploadRestaurantLogoCommand()
             {
                 RestaurantId = id,
-                FileName = file.Name,
+                FileName = file.FileName,
                 FileContent = stream
             };
             await mediator.Send(command);

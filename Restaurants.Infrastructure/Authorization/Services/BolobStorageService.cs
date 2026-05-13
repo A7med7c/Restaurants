@@ -13,9 +13,10 @@ internal class BlobStorageService(IOptions<BlobStorageSettings> blobStorageSetti
     {
         var blobStorageClient = new BlobServiceClient(_blobStorageSettings.ConnectionString);
         var containerClient = blobStorageClient.GetBlobContainerClient(_blobStorageSettings.LogosContainerName);
+        await containerClient.CreateIfNotExistsAsync();
 
         var blobClient = containerClient.GetBlobClient(fileName);
-        await blobClient.UploadAsync(data);
+        await blobClient.UploadAsync(data, overwrite: true);
 
         var blobUrl = blobClient.Uri.ToString();
         return blobUrl;

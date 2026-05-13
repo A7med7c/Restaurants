@@ -42,6 +42,7 @@ public class Program
 
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.MapGroup("api/identity")
                 .WithTags("Identity")

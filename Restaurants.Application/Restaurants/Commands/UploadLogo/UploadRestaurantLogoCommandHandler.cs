@@ -19,8 +19,9 @@ internal class UploadRestaurantLogoCommandHandler(ILogger<UploadRestaurantLogoCo
         var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId)
             ?? throw new NotFoundException(nameof(Restaurant), request.RestaurantId.ToString());
 
-        if (restauratntAuthorizationServices.IsAuthorize(ResourceOperation.Update, restaurant))
+        if (!restauratntAuthorizationServices.IsAuthorize(ResourceOperation.Update, restaurant))
             throw new ForbiddenException();
+
         var logoUrl = await blobStorageService.UploadToBlobAsync(request.FileContent, request.FileName);
 
         restaurant.LogoUrl = logoUrl;

@@ -161,3 +161,12 @@ Content-Type: application/json
   "restaurantid" : 2
 }
 ###
+
+POST {{Restaurants.Api_HostAddress}}/api/restaurants/{id}/logos
+Content-Type: application/json
+
+{
+  //IFormFile
+}
+
+###

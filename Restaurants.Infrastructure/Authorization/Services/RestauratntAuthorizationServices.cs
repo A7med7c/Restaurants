@@ -14,8 +14,15 @@ public class RestauratntAuthorizationServices(
     {
         var currentUser = userContext.GetCurrentUser();
 
+        if (currentUser == null)
+        {
+            logger.LogWarning("No authenticated user was present for {Operation} on restaurant {RestaurantName}",
+                resourceOperation, restaurant);
+            return false;
+        }
+
         logger.LogInformation("Authorizing user {UserEmail} : to operation {Operation} for restaurant {RestaurantName}",
-            currentUser!.Email, resourceOperation, restaurant);
+            currentUser.Email, resourceOperation, restaurant);
 
         if (resourceOperation == ResourceOperation.Read || resourceOperation == ResourceOperation.Create)
         {
@@ -28,7 +35,8 @@ public class RestauratntAuthorizationServices(
             logger.LogInformation("Admin user, delete operation - successful authorization");
             return true;
         }
-        if (resourceOperation == ResourceOperation.Update || resourceOperation == ResourceOperation.Delete
+
+        if ((resourceOperation == ResourceOperation.Update || resourceOperation == ResourceOperation.Delete)
             && currentUser.Id == restaurant.OwnerId)
         {
             logger.LogInformation("Restaurant owner - successful authorization");
